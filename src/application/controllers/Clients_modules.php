@@ -76,7 +76,7 @@ class Clients_modules extends CI_Controller {
 
     public function load() {
 
-        $items = $this->clients_modules->load($this->uri->segment(3));
+        $items = $this->clients_modules->get_all($this->uri->segment(3));
 
 
 

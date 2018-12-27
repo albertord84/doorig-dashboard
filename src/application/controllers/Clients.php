@@ -76,9 +76,12 @@ class Clients extends CI_Controller {
 
     public function load() {
 
-        $items = $this->clients->load($this->uri->segment(3));
-
-
+        $id = $this->uri->segment(3);
+        if ($id) {
+            $items = $this->clients->get_by_id($id);
+        } else {
+            $items = $this->clients->get_all($id);
+        }
 
         echo json_encode($items);
     }

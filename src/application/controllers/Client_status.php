@@ -5,14 +5,14 @@ if (!defined('BASEPATH'))
 
 /**
 
- * Desarrollo del controlador: gatewayController
+ * Desarrollo del controlador: client_statusController
 
  *
 
  * @author Grupo Nobel, Desarrolladores: Daniel M. Garcia Fernandez - Onel Rosello Reyes
 
  */
-class Gateway extends CI_Controller {
+class Client_status extends CI_Controller {
 
     function __construct() {
 
@@ -26,7 +26,7 @@ class Gateway extends CI_Controller {
 
         $this->load->helper('html');
 
-        $this->load->model('gateway_model', 'gateway');
+        $this->load->model('client_status_model', 'client_status');
 
         $this->load->database();
     }
@@ -35,14 +35,14 @@ class Gateway extends CI_Controller {
 
 
 
-        $this->load->view('gateway_view');
+        $this->load->view('client_status_view');
     }
 
     public function combogrid() {
 
 
 
-        $items = $this->gateway->all();
+        $items = $this->client_status->all();
 
         $result = array();
 
@@ -61,13 +61,13 @@ class Gateway extends CI_Controller {
 
         $offset = ($pages - 1) * $rows;
 
-        $items = $this->gateway->collection($rows, $offset);
+        $items = $this->client_status->collection($rows, $offset);
 
         $result = array();
 
         $result["rows"] = $items;
 
-        $result["total"] = $this->db->count_all('gateway');
+        $result["total"] = $this->db->count_all('client_status');
 
 
 
@@ -76,7 +76,7 @@ class Gateway extends CI_Controller {
 
     public function load() {
 
-        $items = $this->gateway->get_all($this->uri->segment(3));
+        $items = $this->client_status->get_all($this->uri->segment(3));
 
 
 
@@ -86,34 +86,28 @@ class Gateway extends CI_Controller {
     public function save() {
 
         $name = $this->input->post('name');
-        $api_url = $this->input->post('api_url');
-        $api_sandbox_url = $this->input->post('api_sandbox_url');
-        $merchant_key = $this->input->post('merchant_key');
         $description = $this->input->post('description');
 
 
-        $this->gateway->save($name, $api_url, $api_sandbox_url, $merchant_key, $description);
+        $this->client_status->save($name, $description);
     }
 
     public function update() {
 
         $name = $this->input->post('name');
-        $api_url = $this->input->post('api_url');
-        $api_sandbox_url = $this->input->post('api_sandbox_url');
-        $merchant_key = $this->input->post('merchant_key');
         $description = $this->input->post('description');
 
 
         $id = $this->uri->segment(3);
 
-        $this->gateway->update($id, $name, $api_url, $api_sandbox_url, $merchant_key, $description);
+        $this->client_status->update($id, $name, $description);
     }
 
     public function delete() {
 
 
 
-        $this->gateway->delete($this->uri->segment(3));
+        $this->client_status->delete($this->uri->segment(3));
     }
 
 }

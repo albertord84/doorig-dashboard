@@ -76,7 +76,7 @@ class Pay_data extends CI_Controller {
 
     public function load() {
 
-        $items = $this->pay_data->load($this->uri->segment(3));
+        $items = $this->pay_data->get_all($this->uri->segment(3));
 
 
 

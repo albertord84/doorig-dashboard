@@ -76,7 +76,7 @@ class Modules extends CI_Controller {
 
     public function load() {
 
-        $items = $this->modules->load($this->uri->segment(3));
+        $items = $this->modules->get_all($this->uri->segment(3));
 
 
 
