@@ -29,6 +29,7 @@
         
         <!-- Custom CSS -->
         <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
+        <link href="<?php echo base_url()?>assets/css/style-doorig.css" rel="stylesheet">
         
         <!-- Dashboard 1 Page CSS -->
         <link href="<?php echo base_url()?>assets/css/pages/dashboard1.css" rel="stylesheet">
