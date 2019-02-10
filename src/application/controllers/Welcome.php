@@ -21,13 +21,40 @@ class Welcome extends CI_Controller {
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
             ]);
+            
+            /**
+// Check if a header exists.
+if ($response->hasHeader('Content-Length')) {
+    echo "It exists";
+}
+
+// Get a header from the response.
+echo $response->getHeader('Content-Length')[0];
+
+// Get all of the response headers.
+foreach ($response->getHeaders() as $name => $values) {
+    echo $name . ': ' . implode(', ', $values) . "\r\n";
+}
+
+The body of a response can be retrieved using the getBody method. The body can be used as a string, cast to a string, or used as a stream like object.
+
+$body = $response->getBody();
+// Implicitly cast the body to a string and echo it
+echo $body;
+// Explicitly cast the body to a string
+$stringBody = (string) $body;
+// Read 10 bytes from the body
+$tenBytes = $body->read(10);
+// Read the remaining contents of the body as a string
+$remainingBytes = $body->getContents();            
+             */
         } catch (\Exception $exc) {
             echo $exc->getTraceAsString();
         }
 
         $StatusCode = $response->getStatusCode();
         if ($StatusCode == 200) {
-            $this->load->view('dashboard', $param);
+            $this->load->view('dashboard_view', $param);
         }
     }
 
