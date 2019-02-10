@@ -143,7 +143,7 @@ $config['subclass_prefix'] = 'MY_';
 |	autoloading (application/config/autoload.php)
 */
 #$config['composer_autoload'] = FALSE;
-$config['composer_autoload'] = __DIR__ . '/../../vendor/autoload.php';
+$config['composer_autoload'] = getcwd() . '/application/third_party/vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
