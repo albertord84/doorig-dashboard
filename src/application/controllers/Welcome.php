@@ -15,55 +15,42 @@ class Welcome extends CI_Controller {
     }
 
     public function confirm_login($login_token) {
+        # guzzle client define
+        $client = new GuzzleHttp\Client();
+
+        #This url define speific Target for guzzle
+        $url = "http://" . $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
+
+        #guzzle
         try {
-            $url = "http://" . $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
-            $GuzClient = new \GuzzleHttp\Client();
-            $response = $GuzClient->post($url, [
-                GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
-            ]);
-            
-            /**
-// Check if a header exists.
-if ($response->hasHeader('Content-Length')) {
-    echo "It exists";
-}
-
-// Get a header from the response.
-echo $response->getHeader('Content-Length')[0];
-
-// Get all of the response headers.
-foreach ($response->getHeaders() as $name => $values) {
-    echo $name . ': ' . implode(', ', $values) . "\r\n";
-}
-
-The body of a response can be retrieved using the getBody method. The body can be used as a string, cast to a string, or used as a stream like object.
-
-$body = $response->getBody();
-// Implicitly cast the body to a string and echo it
-echo $body;
-// Explicitly cast the body to a string
-$stringBody = (string) $body;
-// Read 10 bytes from the body
-$tenBytes = $body->read(10);
-// Read the remaining contents of the body as a string
-$remainingBytes = $body->getContents();            
-             */
-        } catch (\Exception $exc) {
-            echo $exc->getTraceAsString();
-        }
-
-        $StatusCode = $response->getStatusCode();
-        if ($StatusCode == 200) {
-            $this->load->view('dashboard_view', $param);
+            # guzzle post request example with form parameter
+            $response = $client->request('POST',
+                    $url,
+                    ['form_params'
+                        => ['login_token' => $login_token]
+                    ]
+            );
+            #guzzle repose
+            $json = $response->getBody();
+            $data = json_decode($json);
+            var_dump($data);
+            if ($data->code == 0) {
+                $param["lateral_menu"] = $this->load->view('lateral_menu');
+                $this->load->view('dashboard_view', $param);
+            }
+        } catch (GuzzleHttp\Exception\BadResponseException $e) {
+            #guzzle repose for future use
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            print_r($responseBodyAsString);
         }
     }
 
-    public function message_view() {  
+    public function message_view() {
         $param["lateral_menu"] = $this->load->view('lateral_menu');
         $this->load->view('message_view', $param);
     }
-    
-    
+
     public function message() {
         $this->is_ip_hacker();
         $this->load->model('class/system_config');
@@ -83,5 +70,5 @@ $remainingBytes = $body->getContents();
         }
         echo json_encode($result);
     }
-    
+
 }
