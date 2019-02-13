@@ -11,19 +11,21 @@ class Welcome extends CI_Controller {
 
     public function index($login_token) {
         try {
-            $url = "http://" . $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
+            $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
             ]);
         } catch (\Exception $exc) {
-            echo $exc->getTraceAsString();
+            header("Location:".$GLOBALS['sistem_config']->BASE_SITE_URL);
+            //echo $exc->getTraceAsString();
         }
-
         $StatusCode = $response->getStatusCode();
         if ($StatusCode == 200) {
             $param["lateral_menu"] = $this->load->view('lateral_menu');
             $this->load->view('dashboard_view', $param);
+        }else{
+            header("Location:".$GLOBALS['sistem_config']->BASE_SITE_URL);
         }
     }
 
