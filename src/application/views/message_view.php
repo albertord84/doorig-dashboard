@@ -34,12 +34,12 @@
     </head>
 
     <body class="fix-header fix-sidebar card-no-border">
-        <div class="preloader">
+<!--        <div class="preloader">
             <div class="loader">
                 <div class="loader__figure"></div>
                 <p class="loader__label">DOORIG</p>
             </div>
-        </div>
+        </div>-->
         <!-- Main wrapper -->
         <div id="main-wrapper">            
             <?php echo $lateral_menu;?>
@@ -92,16 +92,14 @@
                         </div>
                     </div>                        
                 </div>
-
             </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
+            
+            <?php echo $modals?>
+            
             <footer class="footer">
                 © 2018 Adminwrap by wrappixel.com
-            </footer>
-            <!-- End footer -->
-        </div>        
-        <!-- End Wrapper -->
+            </footer>            
+        </div>
         
         <!-- All Jquery -->
         <script src="<?php echo base_url()?>assets/node_modules/jquery/jquery.min.js"></script>

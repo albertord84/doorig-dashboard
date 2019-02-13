@@ -34,21 +34,22 @@
     </head>
 
     <body class="fix-header fix-sidebar card-no-border">
-        <div class="preloader">
+        <!--<div class="preloader">
             <div class="loader">
                 <div class="loader__figure"></div>
                 <p class="loader__label">DOORIG</p>
             </div>
-        </div>
+        </div>-->
         <!-- Main wrapper -->
-        <div id="main-wrapper">            
+        <div id="main-wrapper">
             <?php echo $lateral_menu;?>
         </div>
         
             <!-- Page wrapper  -->
         <div class="page-wrapper">
-            <!-- Container fluid  -->
             <div class="container-fluid">
+                
+                <!-- welcome  -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h3 class="text-themecolor">Bem-vindo ao seu Dashboard!</h3>
@@ -58,9 +59,9 @@
                         </ol>
                     </div>                        
                 </div>
-                <!-- End Bread crumb and right sidebar toggle -->
 
 
+                <!-- modules  -->
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
@@ -80,12 +81,18 @@
                                     </p>                                                                              
                                 </div>
                                 <div class="text-center">
-                                    <a href="#">Ver mais</a>
+                                    <!--<a href="#">Ver mais</a>-->                                    
+                                    <a class="has-arrow waves-effect waves-dark visivility-access" aria-expanded="false">
+                                        <button type="button" class="btn btn-info">
+                                            Acessar
+                                        </button>                                        
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
+                    
+                    <!--<div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex m-b-30 no-block">
@@ -106,10 +113,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row">
+                    </div>-->
+                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -128,11 +133,19 @@
                                     </p>                                                                              
                                 </div>                                    
                                 <div class="text-center">
-                                    <a href="#">Ver mais</a>
+                                    <!--<a href="#">Ver mais</a>-->                                    
+                                    <a class="has-arrow waves-effect waves-dark post-stories-access" aria-expanded="false">
+                                        <button type="button" class="btn btn-info">
+                                            Acessar
+                                        </button>                                        
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -149,15 +162,17 @@
                                     </p>                                                                             
                                 </div>                                    
                                 <div class="text-center">
-                                    <a href="#">Ver mais</a>
+                                    <!--<a href="#">Ver mais</a>-->                                    
+                                    <a class="has-arrow waves-effect waves-dark directs-access" aria-expanded="false">
+                                        <button type="button" class="btn btn-info">
+                                            Acessar
+                                        </button>                                        
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="row">
+                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
                             <div class="card-body">
@@ -174,99 +189,25 @@
                                     </p>                                                                              
                                 </div>                                    
                                 <div class="text-center">
-                                    <a href="#">Ver mais</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Deep-Analisys</h5>
-                                </div>
-                                <div id="module-leads">
-                                    <p class="text-justify">
-                                        Análise de seguidores, curtidas, comentários e postages.
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        Em dependência da complexidade da tarefa escolhida para fazer a análisis, os resultados podem demorar um tempo.
-                                    </p>                                                                             
-                                </div>                                    
-                                <div class="text-center">
-                                    <a href="#">Ver mais</a>
+                                    <!--<a href="#">Ver mais</a>-->                                    
+                                    <a class="has-arrow waves-effect waves-dark deep-analisys-access" aria-expanded="false">
+                                        <button type="button" class="btn btn-info">
+                                            Acessar
+                                        </button>                                        
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-                <!-- End Comment - chats -->
-                <!-- End Page Content -->
-                <!-- Right sidebar -->
-                <!-- .right-sidebar -->
-                <div class="right-sidebar">
-                    <div class="slimscrollright">
-                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-                        <div class="r-panel-body">
-                            <ul id="themecolors" class="m-t-20">
-                                <li><b>With Light sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme">4</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                                <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme working">7</a></li>
-                                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-                            </ul>
-                            <ul class="m-t-20 chatonline">
-                                <li><b>Chat option</b></li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)"><img src="<?php echo base_url()?>assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Right sidebar -->
             </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
-            <footer class="footer">
-                © 2018 Adminwrap by wrappixel.com
+            
+            <?php echo $modals?>
+            
+            <footer class="footer text-center">
+                DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>
-            <!-- End footer -->
         </div>
-        <!-- End Page wrapper  -->
         
         <!-- All Jquery -->
         <script src="<?php echo base_url()?>assets/node_modules/jquery/jquery.min.js"></script>
@@ -295,9 +236,11 @@
         <!-- Style switcher -->
         <script src="<?php echo base_url()?>assets/node_modules/styleswitcher/jQuery.style.switcher.js"></script>
         
-        <!-- system scripts -->        
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
+        <!-- system scripts --> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
     </body>
 </html>
