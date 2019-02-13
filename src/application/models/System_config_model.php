@@ -26,7 +26,7 @@ class System_config_model extends CI_Model {
         $vars = new stdClass();
         $this->load->database();
         $this->db->select('*');
-        $this->db->from('system_config');
+        $this->db->from('doorig_front_db.system_config');
         $result = $this->db->get()->result_array();
         if ($result) {
             foreach ($result as $var_info) {

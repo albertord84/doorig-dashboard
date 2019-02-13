@@ -23,30 +23,30 @@ class Welcome extends CI_Controller {
             ]);
             
             /**
-// Check if a header exists.
-if ($response->hasHeader('Content-Length')) {
-    echo "It exists";
-}
+            // Check if a header exists.
+            if ($response->hasHeader('Content-Length')) {
+                echo "It exists";
+            }
 
-// Get a header from the response.
-echo $response->getHeader('Content-Length')[0];
+            // Get a header from the response.
+            echo $response->getHeader('Content-Length')[0];
 
-// Get all of the response headers.
-foreach ($response->getHeaders() as $name => $values) {
-    echo $name . ': ' . implode(', ', $values) . "\r\n";
-}
+            // Get all of the response headers.
+            foreach ($response->getHeaders() as $name => $values) {
+                echo $name . ': ' . implode(', ', $values) . "\r\n";
+            }
 
-The body of a response can be retrieved using the getBody method. The body can be used as a string, cast to a string, or used as a stream like object.
+            The body of a response can be retrieved using the getBody method. The body can be used as a string, cast to a string, or used as a stream like object.
 
-$body = $response->getBody();
-// Implicitly cast the body to a string and echo it
-echo $body;
-// Explicitly cast the body to a string
-$stringBody = (string) $body;
-// Read 10 bytes from the body
-$tenBytes = $body->read(10);
-// Read the remaining contents of the body as a string
-$remainingBytes = $body->getContents();            
+            $body = $response->getBody();
+            // Implicitly cast the body to a string and echo it
+            echo $body;
+            // Explicitly cast the body to a string
+            $stringBody = (string) $body;
+            // Read 10 bytes from the body
+            $tenBytes = $body->read(10);
+            // Read the remaining contents of the body as a string
+            $remainingBytes = $body->getContents();            
              */
         } catch (\Exception $exc) {
             echo $exc->getTraceAsString();
@@ -62,7 +62,6 @@ $remainingBytes = $body->getContents();
         $param["lateral_menu"] = $this->load->view('lateral_menu');
         $this->load->view('message_view', $param);
     }
-    
     
     public function message() {
         $this->is_ip_hacker();
