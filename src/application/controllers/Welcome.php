@@ -16,24 +16,30 @@ class Welcome extends CI_Controller {
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
             ]);
+            
+            $StatusCode = $response->getStatusCode();
+            $content = $response->getBody()->getContents();
+            if ($StatusCode == 200 && $content->code == 0) {
+                // @TODO Alberto: Load contreted modules
+                
+                
+                $param["lateral_menu"] = $this->load->view('lateral_menu');
+                $this->load->view('dashboard_view', $param);
+            } else {
+                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+            }
         } catch (\Exception $exc) {
-            header("Location:".$GLOBALS['sistem_config']->BASE_SITE_URL);
+            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             //echo $exc->getTraceAsString();
         }
-        $StatusCode = $response->getStatusCode();
-        if ($StatusCode == 200) {
-            $param["lateral_menu"] = $this->load->view('lateral_menu');
-            $this->load->view('dashboard_view', $param);
-        }else{
-            header("Location:".$GLOBALS['sistem_config']->BASE_SITE_URL);
-        }
+        header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
-    public function message_view() {  
+    public function message_view() {
         $param["lateral_menu"] = $this->load->view('lateral_menu');
         $this->load->view('message_view', $param);
     }
-    
+
     public function message() {
         $this->is_ip_hacker();
         $this->load->model('class/system_config');
@@ -53,5 +59,5 @@ class Welcome extends CI_Controller {
         }
         echo json_encode($result);
     }
-    
+
 }
