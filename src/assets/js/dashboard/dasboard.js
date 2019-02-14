@@ -27,7 +27,9 @@ $(document).ready(function(){
         var btn =this;
         $.ajax({ 
             url : base_url+'index.php/welcome/call_to_generate_access_token',
-            data :{},
+            data :{
+                "final_module":"visibility",
+            },
             type : 'POST',
             dataType : 'json',
             success : function(response){
