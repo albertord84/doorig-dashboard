@@ -4,11 +4,12 @@ ini_set('xdebug.var_display_max_depth', 256);
 ini_set('xdebug.var_display_max_children', 256);
 ini_set('xdebug.var_display_max_data', 1024);
 
+use business\Client;
+use business\ClientModule;
+use business\Module;
 use business\Response\Response;
 use business\Response\ResponseLoginToken;
-use business\Client;
-use business\Module;
-use business\ClientModule;
+use business\Response\ResponseClientModule;
 
 class Welcome extends CI_Controller {
 
@@ -21,6 +22,7 @@ class Welcome extends CI_Controller {
         require_once config_item('business-module-class');
         require_once config_item('business-response-class');
         require_once config_item('business-response-login-token-class');
+        require_once config_item('business-response-client-module-class');
     }
 
     public function index($login_token) {
@@ -82,7 +84,7 @@ class Welcome extends CI_Controller {
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
-        } catch (\Exception $exc) {
+        } catch (Exception $exc) {
             header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             //echo $exc->getTraceAsString();
         }
@@ -212,7 +214,7 @@ class Welcome extends CI_Controller {
             //3. Check Login Token
             if ($ClientModule->Login_token == $datas["login_token"]) {
                 //4. retornar Ok y el objeto modulo
-                $Response = new ResponseLoginToken($login_token);
+                $Response = new ResponseClientModule($ClientModule);
                 return $Response->toJson();
             }
             else {

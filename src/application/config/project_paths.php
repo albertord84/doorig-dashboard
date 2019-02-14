@@ -27,6 +27,7 @@ $config['business-own-exception-class'] = getcwd() . '/application/business/OwnE
 //Clases del negocio del Response
 $config['business-response-class'] = getcwd() . '/application/business/Response/Response.php';
 $config['business-response-login-token-class'] = getcwd() . '/application/business/Response/ResponseLoginToken.php';
+$config['business-response-client-module-class'] = getcwd() . '/application/business/Response/ResponseClientModule.php';
 
 //Exception de la BD
 $config['db-exception-class'] = getcwd() . '/application/business/OwnException.php';
