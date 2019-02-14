@@ -17,15 +17,14 @@ if (!defined('BASEPATH'))
 
  */
 class Clients_modules_model extends CI_Model {
-    
+
     public $client_id;
 
     function construct() {
 
         parent::construct();
-        
     }
-    
+
     function set_client_id($client_id) {
         $this->client_id = $client_id;
     }
@@ -61,14 +60,18 @@ class Clients_modules_model extends CI_Model {
 
     function update($id, $client_id, $module_id, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
 
-        $this->client_id = $client_id;
-        $this->module_id = $module_id;
+        if ($client_id)
+            $this->client_id = $client_id;
+        if ($module_id)
+            $this->module_id = $module_id;
         if ($active)
             $this->active = $active;
         if ($init_date)
             $this->init_date = $init_date;
         if ($end_date)
             $this->end_date = $end_date;
+        if ($login_token)
+            $this->login_token = $login_token;
 
         try {
             $this->db->update('clients_modules', $this, array('id' => $id));
@@ -105,11 +108,11 @@ class Clients_modules_model extends CI_Model {
     }
 
     function get_all($active = NULL) {
-        
+
         if ($active !== NULL) {
             $this->db->where('active', $active);
         }
-        
+
         $this->db->where('client_id', $this->client_id);
 
         $this->db->select('*')->from('clients_modules');

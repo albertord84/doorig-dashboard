@@ -5,9 +5,23 @@ ini_set('xdebug.var_display_max_children', 256);
 ini_set('xdebug.var_display_max_data', 1024);
 
 use business\Response\Response;
+use business\Response\ResponseLoginToken;
 use business\Client;
+use business\Module;
+use business\ClientModule;
 
 class Welcome extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+
+        require_once config_item('business-client-class');
+        require_once config_item('business-client-modules-class');
+        require_once config_item('business-client-module-class');
+        require_once config_item('business-module-class');
+        require_once config_item('business-response-class');
+        require_once config_item('business-response-login-token-class');
+    }
 
     public function index($login_token) {
         $param["lateral_menu"] = $this->load->view('lateral_menu');
@@ -106,11 +120,16 @@ class Welcome extends CI_Controller {
         $datas = $this->input->post();
 
 
-        $datas["module_id"] = 1;
         try {
             $client_id = $this->session->userdata('client_id');
+
+
+            $datas["module_id"] = 1;
+            $client_id = 1;
+
+
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
-            $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "index.php/signin/generate_access_token";
+            $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "/welcome/generate_access_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['client_id' => $client_id],
@@ -119,14 +138,11 @@ class Welcome extends CI_Controller {
 
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
+            $content = json_decode($content);
             if ($StatusCode == 200 && $content->code == 0) {
-                // @TODO Alberto: Load contreted modules
-                $Client = new Client();
-                $Client->load_data_by_login_token($login_token);
-                $Client->load_modules(TRUE);
-
-                $param["lateral_menu"] = $this->load->view('lateral_menu');
-                $this->load->view('dashboard_view', $param);
+                //3. Response
+                $Response = new ResponseLoginToken($content->LoginToken);
+                return $Response->toJson();
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
@@ -134,18 +150,78 @@ class Welcome extends CI_Controller {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
             return;
         }
-
-        $Response = new ResponseLoginToken($login_token, $Client->Node->URL);
-        return $Response->toJson();
     }
 
     public function generate_access_token() {
-        //1. Generate MD5 redirection token
-        $key = $Client->Id . time();
-        $login_token = md5($key);
-
         //2. Save MD5 to validate login from dashboard
-        //3. retornar el access_token y el status del modulo StatusModule
+        $datas = $this->input->post();
+
+
+        try {
+
+            $datas["module_id"] = 5;
+            $datas["client_id"] = 1;
+
+            //1. Generate login token
+            $key = $datas["client_id"] . $datas["module_id"] . time();
+            $login_token = md5($key);
+
+            //2. Get cliente & module data
+            // @TODO Alberto: Load contreted modules
+            $Client = new Client();
+            $Client->load_data($datas["client_id"]);
+            $Module = new Module();
+            $Module->load_data($datas["module_id"]);
+
+            //3. Update cliente modules with $login_token
+            $ClientModule = new ClientModule($Client, $Module);
+            $ClientModule->load_data();
+            $ClientModule->update($ClientModule->Id, null, null, null, null, null, $login_token);
+
+            //4. retornar el access_token
+            $Response = new ResponseLoginToken($login_token);
+            return $Response->toJson();
+        } catch (Exception $exc) {
+            Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
+            return;
+        }
+    }
+
+    public function confirm_access_token() {
+        //2. Save MD5 to validate login from dashboard
+        $datas = $this->input->post();
+
+
+        try {
+
+            $datas["login_token"] = "a1fe9db8763995f8ef18377c78c63ddb";
+            $datas["client_id"] = 1;
+            $datas["module_id"] = 5;
+
+            //1. Get cliente & module data
+            // @TODO Alberto: Load contreted modules
+            $Client = new Client();
+            $Client->load_data($datas["client_id"]);
+            $Module = new Module();
+            $Module->load_data($datas["module_id"]);
+
+            //2. Load Client module with data
+            $ClientModule = new ClientModule($Client, $Module);
+            $ClientModule->load_data();
+
+            //3. Check Login Token
+            if ($ClientModule->Login_token == $datas["login_token"]) {
+                //4. retornar Ok y el objeto modulo
+                $Response = new ResponseLoginToken($login_token);
+                return $Response->toJson();
+            }
+            else {
+                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+            }
+        } catch (Exception $exc) {
+            Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
+            return;
+        }
     }
 
 }
