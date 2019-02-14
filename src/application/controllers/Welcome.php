@@ -46,7 +46,7 @@ class Welcome extends CI_Controller {
             print_r($responseBodyAsString);
         }
     }
-    
+
     public function index4($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
@@ -54,13 +54,15 @@ class Welcome extends CI_Controller {
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
             ]);
-            
+
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
             if ($StatusCode == 200 && $content->code == 0) {
                 // @TODO Alberto: Load contreted modules
-                
-                
+                $Client = new Client();
+                $Client->load_data_by_login_token($login_token);
+                $Client->load_modules(TRUE);
+
                 $param["lateral_menu"] = $this->load->view('lateral_menu');
                 $this->load->view('dashboard_view', $param);
             } else {
@@ -98,15 +100,36 @@ class Welcome extends CI_Controller {
         }
         echo json_encode($result);
     }
-    
-    public function call_to_generate_access_token() { 
+
+    public function call_to_generate_access_token() {
         //esta funcion deve estar en todfos los módulos
+        $datas = $this->input->post();
+
+
+        $datas["module_id"] = 1;
         try {
             $client_id = $this->session->userdata('client_id');
+            //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
+            $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "index.php/signin/generate_access_token";
+            $GuzClient = new \GuzzleHttp\Client();
+            $response = $GuzClient->post($url, [
+                GuzzleHttp\RequestOptions::JSON => ['client_id' => $client_id],
+                GuzzleHttp\RequestOptions::JSON => ['module_id' => $datas["module_id"]]
+            ]);
 
-            //llamar a la funcion generate_access_token que esta en el dasboard por Guzle
+            $StatusCode = $response->getStatusCode();
+            $content = $response->getBody()->getContents();
+            if ($StatusCode == 200 && $content->code == 0) {
+                // @TODO Alberto: Load contreted modules
+                $Client = new Client();
+                $Client->load_data_by_login_token($login_token);
+                $Client->load_modules(TRUE);
 
-            
+                $param["lateral_menu"] = $this->load->view('lateral_menu');
+                $this->load->view('dashboard_view', $param);
+            } else {
+                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+            }
         } catch (Exception $exc) {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
             return;
@@ -115,17 +138,14 @@ class Welcome extends CI_Controller {
         $Response = new ResponseLoginToken($login_token, $Client->Node->URL);
         return $Response->toJson();
     }
-    
-  
+
     public function generate_access_token() {
         //1. Generate MD5 redirection token
         $key = $Client->Id . time();
         $login_token = md5($key);
 
         //2. Save MD5 to validate login from dashboard
-        
         //3. retornar el access_token y el status del modulo StatusModule
-
     }
 
 }

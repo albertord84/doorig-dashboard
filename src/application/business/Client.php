@@ -58,7 +58,7 @@ namespace business {
 
         /**
          * Get client data
-         * @param int $email
+         * @param int $login_token
          * @return DataSet  
          */
         public function load_data_by_login_token(string $login_token) {
@@ -81,8 +81,8 @@ namespace business {
         }
 
         /**
-         * Get client data
-         * @param int $email
+         * Get module data
+         * @param int $active
          * @return DataSet  
          */
         public function load_modules(int $active) {
