@@ -3,31 +3,25 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-/**
+use business\Client;
 
- * Desarrollo del controlador: clientsController
-
- *
-
- * @author Grupo Nobel, Desarrolladores: Daniel M. Garcia Fernandez - Onel Rosello Reyes
-
- */
 class Clients extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->helper('html');
-        $this->load->model('clients_model', 'clients');
+
+        require_once config_item('business-client-class');
     }
 
     public function index() {
 
         var_dump("Thanks God!");
-
-        $this->load->view('clients_view');
+        
+        $Client = new Client();
+        $Client->load_data(1);
+        $Client->load_modules(TRUE);
+        
+        var_dump($Client->ClientModules);
     }
 
 }

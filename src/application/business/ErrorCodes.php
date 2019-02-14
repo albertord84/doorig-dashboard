@@ -11,6 +11,7 @@ namespace business {
      */
     class ErrorCodes {
 
+        const DATA_NOT_FOUND = 20;
         const EMAIL_NOT_FOUND = 21;
         const WRONG_PASSWORD = 22;
         const EMAIL_ALREADY_EXIST = 23;
@@ -22,6 +23,7 @@ namespace business {
         const VALIDATION_TOKEN_NOT_FOUND = 28;
 
         public static $Messages = array(
+            ErrorCodes::DATA_NOT_FOUND => "Dado não encontrado",
             ErrorCodes::EMAIL_NOT_FOUND => "Email não encontrado",
             ErrorCodes::WRONG_PASSWORD => "O password não coiside para o email informado",
             ErrorCodes::EMAIL_ALREADY_EXIST => "O email informado ja existe",
