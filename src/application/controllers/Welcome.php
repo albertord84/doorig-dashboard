@@ -10,8 +10,9 @@ use business\Client;
 class Welcome extends CI_Controller {
 
     public function index($login_token) {
-        $param["lateral_menu"] = $this->load->view('lateral_menu');
+        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
+        
         $this->load->view('dashboard_view', $param);
     }
     
@@ -29,7 +30,8 @@ class Welcome extends CI_Controller {
                 // @TODO Alberto: Load contreted modules
                 
                 
-                $param["lateral_menu"] = $this->load->view('lateral_menu');
+                $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
+                $param["modals"] = $this->load->view('modals', '', true);
                 $this->load->view('dashboard_view', $param);
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
@@ -42,7 +44,7 @@ class Welcome extends CI_Controller {
     }
 
     public function message_view() {
-        $param["lateral_menu"] = $this->load->view('lateral_menu');
+        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
         $this->load->view('message_view', $param);
     }
