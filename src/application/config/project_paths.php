@@ -16,6 +16,9 @@ if (!defined('BASEPATH'))
 
 $config['business-class'] = getcwd() . '/application/business/Business.php';
 $config['business-client-class'] = getcwd() . '/application/business/Client.php';
+$config['business-client-module-class'] = getcwd() . '/application/business/ClientModule.php';
+$config['business-client-modules-class'] = getcwd() . '/application/business/ClientModules.php';
+$config['business-module-class'] = getcwd() . '/application/business/Module.php';
 $config['business-visitor-class'] = getcwd() . '/application/business/Visitor.php';
 $config['business-client-status-class'] = getcwd() . '/application/business/ClientStatus.php';
 $config['business-error-codes-class'] = getcwd() . '/application/business/ErrorCodes.php';
@@ -24,6 +27,7 @@ $config['business-own-exception-class'] = getcwd() . '/application/business/OwnE
 //Clases del negocio del Response
 $config['business-response-class'] = getcwd() . '/application/business/Response/Response.php';
 $config['business-response-login-token-class'] = getcwd() . '/application/business/Response/ResponseLoginToken.php';
+$config['business-response-client-module-class'] = getcwd() . '/application/business/Response/ResponseClientModule.php';
 
 //Exception de la BD
 $config['db-exception-class'] = getcwd() . '/application/business/OwnException.php';

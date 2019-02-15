@@ -2,22 +2,26 @@
 
 namespace business\Response {
 
+    use business\ClientModule;
+
     require_once config_item('business-response-class');
+    require_once config_item('business-client-module-class');
 
     /**
      * Description of Response
      *
      * @author albertord
      */
-    class ResponseLoginToken extends Response {
+    class ResponseClientModule extends Response {
 
-        public $LoginToken;
+        public $ClientModule;
 
-        function __construct(string $LoginToken, int $code = 0, string $message = "") {
+        function __construct(ClientModule &$Module, int $code = 0, string $message = "") {
             parent::__construct($code, $message);
 
-            $this->LoginToken = $LoginToken;
-            $this->output_array += array('LoginToken' => $this->LoginToken);
+            $this->ClientModule = $Module;
+            unset($this->ClientModule->CI);
+            $this->output_array += array('ClientModule' => $this->ClientModule);
         }
 
         public function toJson() {

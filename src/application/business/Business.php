@@ -2,24 +2,24 @@
 
 namespace business {
 
-  /**
-   * @category Business Class
-   * 
-   * @access public
-   *
-   * @todo Define business base class.
-   * 
-   */
-  abstract class Business {
+    /**
+     * @category Business Class
+     * 
+     * @access public
+     *
+     * @todo Define business base class.
+     * 
+     */
+    abstract class Business {
 
-    public function __construct() {
-      
+        public function __construct() {
+            $this->CI = &get_instance();
+        }
+
+        public function TEST($param) {
+            
+        }
+
     }
-
-    public function TEST($param) {
-      
-    }
-
-  }
 
 }
