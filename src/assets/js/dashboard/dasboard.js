@@ -11,7 +11,7 @@ $(document).ready(function(){
             success : function(response){
                 spinner_stop(btn);
                 if(response.code===0){
-                    $(location).attr('href', final_url+"/src/index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
+                    $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
@@ -35,7 +35,7 @@ $(document).ready(function(){
             success : function(response){
                 spinner_stop(btn);
                 if(response.code===0){
-                    $(location).attr('href', final_url+"/src/index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
+                    $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
@@ -77,7 +77,7 @@ $(document).ready(function(){
             success : function(response){
                 spinner_stop(btn);
                 if(response.code===0){
-                    $(location).attr('href', final_url+"/src/index.php/welcome/message_view/"+response.LoginToken+"/"+response.StatusModule);
+                    $(location).attr('href', final_url+"index.php/welcome/message_view/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
