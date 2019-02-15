@@ -61,6 +61,15 @@ class Clients_model extends CI_Model {
         return $query->row();
     }
 
+    function get_by_login_token(string $login_token) {
+
+        $this->db->where('login_token', $login_token);
+
+        $query = $this->db->get('clients');
+
+        return $query->last_row();
+    }
+    
     function get_all() {
 
         $this->db->select('*')->from('clients');
