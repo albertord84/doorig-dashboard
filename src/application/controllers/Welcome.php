@@ -87,7 +87,7 @@ class Welcome extends CI_Controller {
             }
         } catch (Exception $exc) {
 //            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
-            echo $exc->getTraceAsString();
+            echo $exc->getMessage();
         }
 //        header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
