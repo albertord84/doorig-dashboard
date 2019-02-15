@@ -25,9 +25,8 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-client-module-class');
     }
 
-    public function index($login_token) {
+    public function index() {
         $param["lateral_menu"] = $this->load->view('lateral_menu');
-        $param["modals"] = $this->load->view('modals', '', true);
         $this->load->view('dashboard_view', $param);
     }
 
@@ -66,6 +65,7 @@ class Welcome extends CI_Controller {
     public function index4($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
+            var_dump($url);
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
@@ -73,6 +73,7 @@ class Welcome extends CI_Controller {
 
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
+            var_dump($content);
             if ($StatusCode == 200 && $content->code == 0) {
                 // @TODO Alberto: Load contreted modules
                 $Client = new Client();
@@ -82,13 +83,13 @@ class Welcome extends CI_Controller {
                 $param["lateral_menu"] = $this->load->view('lateral_menu');
                 $this->load->view('dashboard_view', $param);
             } else {
-                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+//                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
-            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+//            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             //echo $exc->getTraceAsString();
         }
-        header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+//        header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
     public function message_view() {
@@ -213,11 +214,12 @@ class Welcome extends CI_Controller {
 
             //3. Check Login Token
             if ($ClientModule->Login_token == $datas["login_token"]) {
-                //4. retornar Ok y el objeto modulo
+                //4. Remove login_token from DB
+//                $ClientModule->update($ClientModule->Id, NULL, NULL, NULL, NULL, NULL, "ok");
+                //5. retornar Ok y el objeto modulo
                 $Response = new ResponseClientModule($ClientModule);
                 return $Response->toJson();
-            }
-            else {
+            } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
