@@ -65,7 +65,6 @@ class Welcome extends CI_Controller {
     public function index4($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
-            var_dump($url);
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
@@ -73,7 +72,7 @@ class Welcome extends CI_Controller {
 
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
-            var_dump($content);
+            $content = json_decode($content);
             if ($StatusCode == 200 && $content->code == 0) {
                 // @TODO Alberto: Load contreted modules
                 $Client = new Client();
