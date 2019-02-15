@@ -2,29 +2,31 @@ $(document).ready(function(){
     
     $(".dashboard-access").click(function(){        
         var final_url = base_url.replace(module,"dashboard");
-        var btn =this;
+        //var btn =this;
         $.ajax({ 
             url : base_url+'index.php/welcome/call_to_generate_access_token',
-            data :{},
+            data :{
+                
+            },
             type : 'POST',
             dataType : 'json',
             success : function(response){
-                spinner_stop(btn);
+                //spinner_stop(btn);
                 if(response.code===0){
                     $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
             error : function(xhr, status) {
-                spinner_stop(btn);
-                modal_alert_message(T('Erro enviando a mensagem, tente depois...'));                    
+                //spinner_stop(btn);
+                modal_alert_message('Erro enviando a mensagem, tente depois...');                    
             }
         });  
     });
     
     $(".visivility-access").click(function(){        
         var final_url = base_url.replace(module,"visibility");
-        var btn =this;
+        //var btn =this;
         $.ajax({ 
             url : base_url+'index.php/welcome/call_to_generate_access_token',
             data :{
@@ -33,15 +35,15 @@ $(document).ready(function(){
             type : 'POST',
             dataType : 'json',
             success : function(response){
-                spinner_stop(btn);
+                //spinner_stop(btn);
                 if(response.code===0){
                     $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
             error : function(xhr, status) {
-                spinner_stop(btn);
-                modal_alert_message(T('Erro enviando a mensagem, tente depois...'));                    
+                //spinner_stop(btn);
+                modal_alert_message('Erro enviando a mensagem, tente depois...');                    
             }
         });       
     });
@@ -68,22 +70,22 @@ $(document).ready(function(){
             
     $(".message-access").click(function(){
         var final_url = base_url.replace(module,"dashboard");
-        var btn =this;
+        //var btn =this;
         $.ajax({ 
             url : base_url+'index.php/welcome/call_to_generate_access_token',
             data :{},
             type : 'POST',
             dataType : 'json',
             success : function(response){
-                spinner_stop(btn);
+                //spinner_stop(btn);
                 if(response.code===0){
                     $(location).attr('href', final_url+"index.php/welcome/message_view/"+response.LoginToken+"/"+response.StatusModule);
                 } else
                     modal_alert_message(response.message);                    
             },
             error : function(xhr, status) {
-                spinner_stop(btn);
-                modal_alert_message(T('Erro enviando a mensagem, tente depois...'));                    
+                //spinner_stop(btn);
+                modal_alert_message('Erro enviando a mensagem, tente depois...');                    
             }
         }); 
     });
