@@ -34,12 +34,7 @@
     </head>
 
     <body class="fix-header fix-sidebar card-no-border">
-        <!--<div class="preloader">
-            <div class="loader">
-                <div class="loader__figure"></div>
-                <p class="loader__label">DOORIG</p>
-            </div>
-        </div>-->
+        
         <!-- Main wrapper -->
         <div id="main-wrapper">
             <?php echo $lateral_menu;?>
@@ -63,9 +58,9 @@
 
                 <!-- modules  -->
                 <div class="row">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-6 col-md-12" >
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="<?php if($client->ClientModules->Modules[0]->Id == 1) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Mais Visibilidade</h5>
                                 </div>

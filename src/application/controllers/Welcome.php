@@ -48,7 +48,8 @@ class Welcome extends CI_Controller {
                 $Client = new Client();
                 $Client->load_data_by_doorig_client_id($content->ClientId);
                 $Client->load_modules(TRUE);
-
+                $this->session->set_userdata('client', $Client);
+                $param["client"] = $Client;
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
                 $this->load->view('dashboard_view', $param);
