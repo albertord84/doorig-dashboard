@@ -49,11 +49,13 @@ namespace business {
 
         private function fill_data(array $modules = NULL) {
             if (count($modules)) {
-                foreach ($modules as $key => $module) {
+                foreach ($modules as $key => $client_module) {
                     $Module = new Module();
-                    $Module->load_data($module->id);
-                    $this->Modules[$key] = new ClientModule($this->Client, $Module);
-                    $this->Modules[$key]->fill_data($module);
+                    $Module->load_data($client_module->id);
+                    $this->Modules[$Module->Name] = new ClientModule($this->Client, $Module);
+                    $this->Modules[$Module->Name]->fill_data($client_module);
+                    //$this->Modules[$key] = new ClientModule($this->Client, $Module);
+                    //$this->Modules[$key]->fill_data($module);
                 }
             } else {
                 //throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);

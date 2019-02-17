@@ -26,7 +26,13 @@ class Welcome extends CI_Controller {
     }
 
     
-    public function indextmp($login_token) {
+    public function indextmp($client_id) {
+                $Client = new Client();
+                $Client->load_data_by_doorig_client_id($client_id);
+                $Client->load_modules(TRUE);   
+                var_dump($Client);
+        
+        
         $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
         $this->load->view('dashboard_view', $param);
