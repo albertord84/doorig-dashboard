@@ -27,8 +27,9 @@ namespace business {
         function __construct() {
             parent::__construct();
 
-            $this->CI = &get_instance();
-            $this->CI->load->model("Modules_model");
+            $CI = &get_instance();
+            $CI = &get_instance();
+            $CI->load->model("Modules_model");
         }
 
         /**
@@ -37,7 +38,8 @@ namespace business {
          */
         public function load_data(int $Id) {
             $this->Id = $Id;
-            $data = $this->CI->Modules_model->get_by_id($this->Id);
+            $CI = &get_instance();
+            $data = $CI->Modules_model->get_by_id($this->Id);
             if ($data == null) {
                 throw ErrorCodes::getException(ErrorCodes::DATA_NOT_FOUND);
             }
