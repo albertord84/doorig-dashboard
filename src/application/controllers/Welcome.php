@@ -26,13 +26,13 @@ class Welcome extends CI_Controller {
     }
 
     
-    public function index($login_token) {
+    public function indextmp($login_token) {
         $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
         $this->load->view('dashboard_view', $param);
     }
     
-    public function index4($login_token) {
+    public function index($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
             $GuzClient = new \GuzzleHttp\Client();
