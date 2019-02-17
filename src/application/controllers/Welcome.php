@@ -34,7 +34,7 @@ class Welcome extends CI_Controller {
     
     public function index($login_token) {
         try {
-            $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "index.php/signin/dashboard_confirm_login_token";
+            $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
