@@ -99,6 +99,8 @@ class Clients_modules_model extends CI_Model {
 
         $this->db->where('client_id', $this->client_id);
         $this->db->where('module_id', $module_id);
+        
+        //$this->db->join('modules', "modules.id = clients_modules.module_id");
 
         $query = $this->db->get('clients_modules');
 
