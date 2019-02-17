@@ -29,7 +29,8 @@ namespace business {
         function __construct(Client &$client) {
             parent::__construct();
 
-            $this->CI->load->model("Clients_modules_model");
+            $CI = &get_instance();
+            $CI->load->model("Clients_modules_model");
 
             $this->Client = $client;
             $this->Modules = array();
@@ -40,7 +41,8 @@ namespace business {
          * @throws Exception
          */
         public function load_data(int $active) {
-            $data = $this->CI->Clients_modules_model->get_all($this->Client->Id);
+            $CI = &get_instance();
+            $data = $CI->Clients_modules_model->get_all($this->Client->Id);
 
             $this->fill_data($data);
         }

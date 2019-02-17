@@ -33,10 +33,11 @@ namespace business {
         function __construct(Client &$client, Module &$module) {
             parent::__construct();
 
-//            $this->CI->load->model("Clients_model");
-//            $this->CI->load->model("Modules_model");
-            $this->CI->load->model("Clients_modules_model");
-            $this->CI->Clients_modules_model->set_client_id($client->Id);
+            $CI = &get_instance();
+//            $CI->load->model("Clients_model");
+//            $CI->load->model("Modules_model");
+            $CI->load->model("Clients_modules_model");
+            $CI->Clients_modules_model->set_client_id($client->Id);
 
             $this->Client = $client;
             $this->Module = $module;
@@ -47,7 +48,8 @@ namespace business {
          * @throws Exception
          */
         public function load_data() {
-            $data = $this->CI->Clients_modules_model->get_by_module_id($this->Module->Id);
+            $CI = &get_instance();
+            $data = $CI->Clients_modules_model->get_by_module_id($this->Module->Id);
             if ($data == null) {
                 throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);
             }
@@ -67,7 +69,8 @@ namespace business {
         }
 
         public function update($id, $client_id = NULL, $module_id = NULL, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
-            $client_module_id = $this->CI->Clients_modules_model->update($id, $client_id, $module_id, $active, $init_date, $end_date, $login_token);
+            $CI = &get_instance();
+            $client_module_id = $CI->Clients_modules_model->update($id, $client_id, $module_id, $active, $init_date, $end_date, $login_token);
             $this->load_data($client_module_id);
             return $client_module_id;
         }

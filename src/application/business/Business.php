@@ -13,7 +13,7 @@ namespace business {
     abstract class Business {
 
         public function __construct() {
-            $this->CI = &get_instance();
+            //$this->CI = &get_instance();
         }
 
         public function TEST($param) {

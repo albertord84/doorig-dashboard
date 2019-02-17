@@ -38,8 +38,9 @@ namespace business {
 
             $this->ClientModules = new ClientModules($this);
 
-            $this->CI->load->model('Clients_model');
-            $this->CI->load->model('Clients_modules_model');
+            $CI = &get_instance();
+            $CI->load->model('Clients_model');
+            $CI->load->model('Clients_modules_model');
         }
 
         /**
@@ -48,7 +49,8 @@ namespace business {
          * @return DataSet  
          */
         public function load_data(int $id) {
-            $data = $this->CI->Clients_model->get_by_id($id);
+            $CI = &get_instance();
+            $data = $CI->Clients_model->get_by_id($id);
             if ($data == null) {
                 throw ErrorCodes::getException(ErrorCodes::CLIENT_ID_NOT_FOUND);
             }
@@ -62,7 +64,8 @@ namespace business {
          * @return DataSet  
          */
         public function load_data_by_login_token(string $login_token) {
-            $data = $this->CI->Clients_model->get_by_login_token($login_token);
+            $CI = &get_instance();
+            $data = $CI->Clients_model->get_by_login_token($login_token);
             if ($data == null) {
                 throw ErrorCodes::getException(ErrorCodes::VALIDATION_TOKEN_NOT_FOUND);
             }
@@ -76,7 +79,8 @@ namespace business {
          * @return DataSet  
          */
         public function load_data_by_doorig_client_id(int $client_id) {
-            $data = $this->CI->Clients_model->get_by_doorig_client_id($client_id);
+            $CI = &get_instance();
+            $data = $CI->Clients_model->get_by_doorig_client_id($client_id);
             if ($data == null) {
                 throw ErrorCodes::getException(ErrorCodes::VALIDATION_TOKEN_NOT_FOUND);
             }
@@ -100,7 +104,8 @@ namespace business {
          * @return DataSet  
          */
         public function load_modules(int $active) {
-            $this->CI->Clients_modules_model->set_client_id($this->Id);
+            $CI = &get_instance();
+            $CI->Clients_modules_model->set_client_id($this->Id);
             $this->ClientModules->load_data($active);
         }
 
@@ -108,12 +113,14 @@ namespace business {
             if (Client::exist($email, ClientStatus::ACTIVE)) {  
                 throw ErrorCodes::getException(ErrorCodes::EMAIL_ALREADY_EXIST);
             }
-            $client_id = $this->CI->Clients_model->save($pay_id, $login_token);
+            $CI = &get_instance();
+            $client_id = $CI->Clients_model->save($pay_id, $login_token);
             return $client_id;
         }
 
         public function update($id, $pay_id = NULL, $login_token = NULL) {
-            $client_id = $this->CI->Clients_model->update($id, $pay_id, $login_token);
+            $CI = &get_instance();
+            $client_id = $CI->Clients_model->update($id, $pay_id, $login_token);
             return $client_id;
         }
 
@@ -124,7 +131,8 @@ namespace business {
          * @return type
          */
         static function get_clients() {
-            return $this->CI->Clients_model->get_all();
+            $CI = &get_instance();
+            return $CI->Clients_model->get_all();
         }
 
     }
