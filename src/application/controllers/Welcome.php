@@ -37,16 +37,16 @@ class Welcome extends CI_Controller {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
-                GuzzleHttp\RequestOptions::JSON => ['login_token' => $login_token]
+                GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
             ]);
 
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
             $content = json_decode($content);
-            if ($StatusCode == 200 && $content->code == 0) {
+            if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {
                 // @TODO Alberto: Load contreted modules
                 $Client = new Client();
-                $Client->load_data_by_login_token($login_token);
+                $Client->load_data_by_doorig_client_id($content->ClientId);
                 $Client->load_modules(TRUE);
 
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);

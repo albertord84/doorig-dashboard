@@ -70,6 +70,20 @@ namespace business {
             $this->fill_data($data);
         }
 
+        /**
+         * Get client data
+         * @param int $login_token
+         * @return DataSet  
+         */
+        public function load_data_by_doorig_client_id(int $client_id) {
+            $data = $this->CI->Clients_model->get_by_doorig_client_id($client_id);
+            if ($data == null) {
+                throw ErrorCodes::getException(ErrorCodes::VALIDATION_TOKEN_NOT_FOUND);
+            }
+
+            $this->fill_data($data);
+        }
+
         private function fill_data(\stdClass $data = NULL) {
             if ($data) {
                 $this->Id = $data->id;

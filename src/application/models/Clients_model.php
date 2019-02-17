@@ -69,6 +69,15 @@ class Clients_model extends CI_Model {
 
         return $query->last_row();
     }
+
+    function get_by_doorig_client_id(int $client_id) {
+
+        $this->db->where('doorig_id', $client_id);
+
+        $query = $this->db->get('clients');
+
+        return $query->last_row();
+    }
     
     function get_all() {
 
