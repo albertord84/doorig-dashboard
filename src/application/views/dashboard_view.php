@@ -112,7 +112,7 @@
                     
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["posts"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Post-Stories</h5>
                                 </div>
@@ -143,7 +143,7 @@
                 <div class="row">                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["directs"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Envio de Directs</h5>
                                 </div>
@@ -170,7 +170,7 @@
                     
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["analysis"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Deep-Analisys</h5>
                                 </div>

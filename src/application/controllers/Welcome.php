@@ -26,18 +26,6 @@ class Welcome extends CI_Controller {
     }
 
     
-    public function indextmp($client_id) {
-                $Client = new Client();
-                $Client->load_data_by_doorig_client_id($client_id);
-                $Client->load_modules(TRUE);   
-                var_dump($Client);
-        
-        
-        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
-        $param["modals"] = $this->load->view('modals', '', true);
-        $this->load->view('dashboard_view', $param);
-    }
-    
     public function index($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
@@ -54,7 +42,39 @@ class Welcome extends CI_Controller {
                 $Client = new Client();
                 $Client->load_data_by_doorig_client_id($content->ClientId);
                 $Client->load_modules(TRUE);
-                $this->session->set_userdata('client', $Client);
+                
+                $this->session->set_userdata('client', serialize($Client)); 
+                $param["client"] = $Client;
+                $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
+                $param["modals"] = $this->load->view('modals', '', true);
+                $this->load->view('dashboard_view', $param);
+            } else {
+                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+            }
+        } catch (Exception $exc) {
+            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+            echo $exc->getMessage();
+        }        
+    }
+    
+    public function internal_index($login_token) {
+        try {
+            $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
+            $GuzClient = new \GuzzleHttp\Client();
+            $response = $GuzClient->post($url, [
+                GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
+            ]);
+
+            $StatusCode = $response->getStatusCode();
+            $content = $response->getBody()->getContents();
+            $content = json_decode($content);
+            if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {
+                // @TODO Alberto: Load contreted modules
+                $Client = new Client();
+                $Client->load_data_by_doorig_client_id($content->ClientId);
+                $Client->load_modules(TRUE);
+                
+                $this->session->set_userdata('client', serialize($Client)); 
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
@@ -131,29 +151,27 @@ class Welcome extends CI_Controller {
         //esta funcion deve estar en todfos los módulos
         $datas = $this->input->post();
 
-
         try {
-            $client_id = $this->session->userdata('client_id');
-
-
-            $datas["module_id"] = 1;
-            $client_id = 1;
-
+            $client_id = unserialize($this->session->userdata('client'))->Id;
+            //var_dump($this->session->userdata('client'));
+//            $datas["final_module_id"] = 1;
+//            $client_id = 1;
 
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
             $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "/welcome/generate_access_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
-                GuzzleHttp\RequestOptions::JSON => ['client_id' => $client_id],
-                GuzzleHttp\RequestOptions::JSON => ['module_id' => $datas["module_id"]]
-            ]);
+                GuzzleHttp\RequestOptions::FORM_PARAMS => [
+                    'client_id' => $client_id,
+                    'module_id' => $datas["module_id"]
+            ]]);
 
             $StatusCode = $response->getStatusCode();
             $content = $response->getBody()->getContents();
             $content = json_decode($content);
             if ($StatusCode == 200 && $content->code == 0) {
                 //3. Response
-                $Response = new ResponseLoginToken($content->LoginToken);
+                $Response = new ResponseLoginToken($content->LoginToken, "", $client_id);
                 return $Response->toJson();
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
@@ -171,8 +189,8 @@ class Welcome extends CI_Controller {
 
         try {
 
-            $datas["module_id"] = 5;
-            $datas["client_id"] = 1;
+            //$datas["module_id"] = 5;
+            //$datas["client_id"] = 1;
 
             //1. Generate login token
             $key = $datas["client_id"] . $datas["module_id"] . time();
@@ -202,13 +220,14 @@ class Welcome extends CI_Controller {
     public function confirm_access_token() {
         //2. Save MD5 to validate login from dashboard
         $datas = $this->input->post();
+        //var_dump($datas);
 
 
         try {
 
-            $datas["login_token"] = "a1fe9db8763995f8ef18377c78c63ddb";
-            $datas["client_id"] = 1;
-            $datas["module_id"] = 5;
+            //$datas["access_token"] = "a1fe9db8763995f8ef18377c78c63ddb";
+            //$datas["client_id"] = 1;
+            //$datas["module_id"] = 5;
 
             //1. Get cliente & module data
             // @TODO Alberto: Load contreted modules
@@ -222,14 +241,15 @@ class Welcome extends CI_Controller {
             $ClientModule->load_data();
 
             //3. Check Login Token
-            if ($ClientModule->Login_token == $datas["login_token"]) {
+            if ($ClientModule->Login_token == $datas["access_token"]) {
                 //4. Remove login_token from DB
 //                $ClientModule->update($ClientModule->Id, NULL, NULL, NULL, NULL, NULL, "ok");
                 //5. retornar Ok y el objeto modulo
                 $Response = new ResponseClientModule($ClientModule);
                 return $Response->toJson();
             } else {
-                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+                Response::ResponseFAIL("Codigo de acesso não encontrado", -1)->toJson();
+                return;
             }
         } catch (Exception $exc) {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
