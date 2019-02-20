@@ -27,7 +27,6 @@ $(document).ready(function(){
     });
     
     $(".visivility-access").click(function(){
-        var final_url = base_url.replace(module,"visibility");
         //var btn =this;
         $.ajax({
             url :base_url+'index.php/welcome/call_to_generate_access_token',
@@ -40,6 +39,7 @@ $(document).ready(function(){
                 console.log(response);
                 //spinner_stop(btn);
                 if(response.code===0){
+                    var final_url = base_url.replace(module,"visibility");
                     $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.ClientId);
                 } else
                     modal_alert_message(response.message);                    

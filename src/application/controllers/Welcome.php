@@ -209,7 +209,7 @@ class Welcome extends CI_Controller {
             $ClientModule->update($ClientModule->Id, null, null, null, null, null, $login_token);
 
             //4. retornar el access_token
-            $Response = new ResponseLoginToken($login_token);
+            $Response = new ResponseLoginToken($login_token, "", $Client->Id);
             return $Response->toJson();
         } catch (Exception $exc) {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
