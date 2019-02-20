@@ -243,7 +243,7 @@ class Welcome extends CI_Controller {
             //3. Check Login Token
             if ($ClientModule->Login_token == $datas["access_token"]) {
                 //4. Remove login_token from DB
-//                $ClientModule->update($ClientModule->Id, NULL, NULL, NULL, NULL, NULL, "ok");
+                $ClientModule->update($ClientModule->Id, NULL, NULL, NULL, NULL, NULL, "ok");
                 //5. retornar Ok y el objeto modulo
                 $Response = new ResponseClientModule($ClientModule);
                 return $Response->toJson();
