@@ -85,7 +85,13 @@ class Welcome extends CI_Controller {
     }
 
     public function contact_us() {
-        
+        $datas = $this->input->post();
+        try {
+            Client::send_contact_us($datas["email"], $datas["username"], $datas["message"], $datas["company"], $datas["phone"]);
+        } catch (\Exception $e) {
+            return Response::ResponseFAIL($e->getMessage(), $e->getCode())->toJson();
+        }
+        Response::ResponseOK(T("Mensagem enviada com sucesso."))->toJson();
     }
     
     
