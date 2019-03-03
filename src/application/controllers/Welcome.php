@@ -11,8 +11,8 @@ use business\Response\Response;
 use business\Response\ResponseLoginToken;
 use business\Response\ResponseClientModule;
 
-class Welcome extends CI_Controller {    
-        
+class Welcome extends CI_Controller {
+
     function __construct() {
         parent::__construct();
         require_once config_item('business-client-class');
@@ -65,9 +65,9 @@ class Welcome extends CI_Controller {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
-            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+//            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             echo $exc->getMessage();
-        }        
+        }
     }
     
     public function log_out() {
@@ -106,19 +106,20 @@ class Welcome extends CI_Controller {
                 $Client = new Client();
                 $Client->load_data_by_doorig_client_id($content->ClientId);
                 $Client->load_modules(TRUE);
-                
-                $this->session->set_userdata('client', serialize($Client)); 
+
+                $this->session->set_userdata('client', serialize($Client));
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
                 $this->load->view('dashboard_view', $param);
             } else {
-                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+                var_dump($content);
+//                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
-            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+//            header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             echo $exc->getMessage();
-        }        
+        }
     }
 
     public function confirm_login($login_token) {
@@ -162,7 +163,6 @@ class Welcome extends CI_Controller {
             //var_dump($this->session->userdata('client'));
 //            $datas["final_module_id"] = 1;
 //            $client_id = 1;
-
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
             $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "/welcome/generate_access_token";
             $GuzClient = new \GuzzleHttp\Client();
@@ -180,7 +180,8 @@ class Welcome extends CI_Controller {
                 $Response = new ResponseLoginToken($content->LoginToken, "", $client_id);
                 return $Response->toJson();
             } else {
-                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
+                var_dump($content);
+//                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
@@ -197,7 +198,6 @@ class Welcome extends CI_Controller {
 
             //$datas["module_id"] = 5;
             //$datas["client_id"] = 1;
-
             //1. Generate login token
             $key = $datas["client_id"] . $datas["module_id"] . time();
             $login_token = md5($key);
@@ -234,7 +234,6 @@ class Welcome extends CI_Controller {
             //$datas["access_token"] = "a1fe9db8763995f8ef18377c78c63ddb";
             //$datas["client_id"] = 1;
             //$datas["module_id"] = 5;
-
             //1. Get cliente & module data
             // @TODO Alberto: Load contreted modules
             $Client = new Client();
