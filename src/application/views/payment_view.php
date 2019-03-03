@@ -29,17 +29,13 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
+            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
 
     <body class="fix-header fix-sidebar card-no-border">
-        <div class="preloader">
-            <div class="loader">
-                <div class="loader__figure"></div>
-                <p class="loader__label">DOORIG</p>
-            </div>
-        </div>
+        
         <!-- Main wrapper -->
         <div id="main-wrapper">            
             <?php echo $lateral_menu;?>
@@ -98,7 +94,7 @@
             <!-- End Container fluid  -->
             <!-- footer -->
             <footer class="footer">
-                © 2018 Adminwrap by wrappixel.com
+                DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>
             <!-- End footer -->
         </div>
@@ -132,8 +128,11 @@
         <script src="<?php echo base_url()?>assets/node_modules/styleswitcher/jQuery.style.switcher.js"></script>
         
         <!-- system scripts -->
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
         
     </body>

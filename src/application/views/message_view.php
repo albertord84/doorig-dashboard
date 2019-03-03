@@ -29,21 +29,16 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
+            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
 
     <body class="fix-header fix-sidebar card-no-border">
-<!--        <div class="preloader">
-            <div class="loader">
-                <div class="loader__figure"></div>
-                <p class="loader__label">DOORIG</p>
-            </div>
-        </div>-->
         <!-- Main wrapper -->
-        <div id="main-wrapper">            
+        <div id="main-wrapper">
             <?php echo $lateral_menu;?>
-        </div>    
+        </div>
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
@@ -57,8 +52,6 @@
                     </div>                        
                 </div>
                 <!-- End Bread crumb and right sidebar toggle -->
-
-
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
@@ -82,7 +75,10 @@
                                                     <textarea id="contact_message" class="textarea_editor form-control" rows="10" placeholder="Mensagem ..."></textarea>
                                                 </div> 
                                                 <div class="text-center">
-                                                    <button id="" type="button" style="min-width: 150px" class="btn btn-info m-t-20"><i class="fa fa-envelope-o"></i> Enviar</button>
+                                                    <button id="contact_btn" type="button" style="min-width: 150px" class="btn btn-info m-t-20">
+                                                        <i class="fa fa-envelope-o"></i> 
+                                                        Enviar
+                                                    </button>
                                                 </div>
                                             </div>
                                     </div>
@@ -97,7 +93,7 @@
             <?php echo $modals?>
             
             <footer class="footer">
-                © 2018 Adminwrap by wrappixel.com
+                DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>            
         </div>
         
@@ -129,8 +125,11 @@
         <script src="<?php echo base_url()?>assets/node_modules/styleswitcher/jQuery.style.switcher.js"></script>
         
         <!-- system scripts -->
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
         
     </body>

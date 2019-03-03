@@ -24,10 +24,7 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-client-module-class');
     }
     
-    public function a() {
-        var_dump(unserialize($this->session->userdata('client')));
-    }
-    
+    //PRIMARY FUNCTIONS----------------------------------------------------------
     public function index($login_token) {
         try {
             $Client=NULL; $ClientDatas=NULL;
@@ -47,7 +44,7 @@ class Welcome extends CI_Controller {
                 if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {                
                     $Client = new Client();
                     $Client->load_data_by_doorig_client_id($content->ClientId);
-                    $Client->load_modules(TRUE);                    
+                    $Client->load_modules(TRUE);
                     //2.1. TODO: get the client informations to be displyed in all views
                     $ClientDatas =(object) array(
                         "ClientId" => $Client->Id,
@@ -80,6 +77,19 @@ class Welcome extends CI_Controller {
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
     
+    public function message_view() {
+        $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
+        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
+        $param["modals"] = $this->load->view('modals', '', true);
+        $this->load->view('message_view', $param);
+    }
+
+    public function contact_us() {
+        
+    }
+    
+    
+    //SECONDARY FUNCTIONS----------------------------------------------------------
     public function internal_index($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
@@ -142,33 +152,7 @@ class Welcome extends CI_Controller {
             print_r($responseBodyAsString);
         }
     }
-
-    public function message_view() {
-        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
-        $param["modals"] = $this->load->view('modals', '', true);
-        $this->load->view('message_view', $param);
-    }
-
-    public function message() {
-        $this->is_ip_hacker();
-        $this->load->model('class/system_config');
-        $GLOBALS['sistem_config'] = $this->system_config->load();
-        $this->load->library('Gmail');
-        $language = $this->input->get();
-        if (isset($language['language']))
-            $param['language'] = $language['language'];
-        else
-            $param['language'] = $GLOBALS['sistem_config']->LANGUAGE;
-        $param['SERVER_NAME'] = $GLOBALS['sistem_config']->SERVER_NAME;
-        $GLOBALS['language'] = $param['language'];
-        $datas = $this->input->post();
-        $result = $this->gmail->send_client_contact_form($datas['name'], $datas['email'], $datas['message'], $datas['company'], $datas['telf']);
-        if ($result['success']) {
-            $result['message'] = $this->T('Mensagem enviada, agradecemos seu contato', array(), $GLOBALS['language']);
-        }
-        echo json_encode($result);
-    }
-
+    
     public function call_to_generate_access_token() {
         //esta funcion deve estar en todfos los módulos
         $datas = $this->input->post();

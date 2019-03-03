@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12" >
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">
+                            <div class="card-body" style="<?php if(($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Mais Visibilidade</h5>
                                 </div>
@@ -234,6 +234,7 @@
         
         <!-- system scripts --> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
