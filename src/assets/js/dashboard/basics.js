@@ -1,5 +1,8 @@
 var ig_profile_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
+var ig_geolocation_regular_expression = "^[a-zA-Z-0-9\._]{1,300}$";
+var ig_hashtag_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
 var verification_code_regular_expression = "^[0-9]{4}$";
+var checkpoint_required_code_regular_expression = "^[0-9]{6}$";
 var email_regular_expression = "^[a-zA-Z0-9\._-]+@([a-zA-Z0-9-]{2,}[.])*[a-zA-Z]{2,}$";
 var complete_name_regular_expression = "^[a-z A-Z0-9áÁéÉíÍóÓúÚàÀèÈìÌòÒùÙãÃõÕâÂêÊôÔûÛñ\._]{2,150}$";
 
@@ -145,6 +148,21 @@ function modal_success_message(text_message){
     $('#success_message_text').text(text_message);        
 }
 
+function modal_confirm_message(text_message,function_name,param){
+    var action = function_name+"('"+param+"')";
+    $('#confirm_message_text').text(text_message);
+    $('#accept_modal_confirm_message').attr('onclick',action)
+    $('#modal_confirm_message').modal('show');
+}
+
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var year = a.getFullYear();
+    var month = a.getMonth();
+    var date = a.getDate();
+    var time = year+'-'+month+'-'+date;
+    return time;
+}
 
 $(document).ready(function(){  
     
@@ -155,6 +173,18 @@ $(document).ready(function(){
     $("#accept_modal_success_message").click(function () {
         $('#modal_success_message').modal('hide');
     });
+    
+    $("#lnk_loguot").click(function () {
+        $(location).attr('href', base_url+'index.php/welcome/log_out')
+        return false;
+    });
+    
+    function display_client_datas(){        
+        $(".client_email").text(client_datas.ClientEmail);        
+        $(".client_photo").prop("src",client_datas.ClientPhotoUrl);        
+    }
+    
+    display_client_datas();
     
  }); 
  

@@ -29,6 +29,7 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
+            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
