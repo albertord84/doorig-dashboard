@@ -15,7 +15,6 @@ class Welcome extends CI_Controller {
         
     function __construct() {
         parent::__construct();
-
         require_once config_item('business-client-class');
         require_once config_item('business-client-modules-class');
         require_once config_item('business-client-module-class');
@@ -24,37 +23,61 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-login-token-class');
         require_once config_item('business-response-client-module-class');
     }
-
+    
+    public function a() {
+        var_dump(unserialize($this->session->userdata('client')));
+    }
     
     public function index($login_token) {
         try {
-            $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
-            $GuzClient = new \GuzzleHttp\Client();
-            $response = $GuzClient->post($url, [
-                GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
-            ]);
-
-            $StatusCode = $response->getStatusCode();
-            $content = $response->getBody()->getContents();
-            $content = json_decode($content);
-            if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {
-                // @TODO Alberto: Load contreted modules
-                $Client = new Client();
-                $Client->load_data_by_doorig_client_id($content->ClientId);
-                $Client->load_modules(TRUE);
-                
-                $this->session->set_userdata('client', serialize($Client)); 
-                $param["client"] = $Client;
+            $Client=NULL; $ClientDatas=NULL;
+            if($this->session->userdata('client')){
+                $Client = unserialize($this->session->userdata('client'));
+                $ClientDatas = unserialize($this->session->userdata('client_datas'));
+            }
+            else{
+                $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
+                $GuzClient = new \GuzzleHttp\Client();
+                $response = $GuzClient->post($url, [
+                    GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
+                ]);
+                $StatusCode = $response->getStatusCode();
+                $content = $response->getBody()->getContents();
+                $content = json_decode($content);                
+                if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {                
+                    $Client = new Client();
+                    $Client->load_data_by_doorig_client_id($content->ClientId);
+                    $Client->load_modules(TRUE);                    
+                    //2.1. TODO: get the client informations to be displyed in all views
+                    $ClientDatas =(object) array(
+                        "ClientId" => $Client->Id,
+                        "ClientEmail"=>"josergm86@gmail.com",
+                        "ClientPhotoUrl"=> $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."../assets/profile_images/".$Client->Id.".jpg",
+                    );
+                    $this->session->set_userdata('client_datas', serialize($ClientDatas));   
+                    $this->session->set_userdata('client', serialize($Client));                     
+                }
+            }
+            if($Client){
+                $param["client"] = ($Client);
+                $param["client_datas"] = json_encode($ClientDatas);
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
                 $this->load->view('dashboard_view', $param);
-            } else {
+            } else{
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
             header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             echo $exc->getMessage();
         }        
+    }
+    
+    public function log_out() {
+        //$this->load->model('class/user_model');
+        //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
+        $this->session->sess_destroy();
+        header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
     
     public function internal_index($login_token) {
@@ -87,7 +110,6 @@ class Welcome extends CI_Controller {
             echo $exc->getMessage();
         }        
     }
-    
 
     public function confirm_login($login_token) {
         # guzzle client define
