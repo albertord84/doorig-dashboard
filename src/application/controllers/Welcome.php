@@ -94,6 +94,13 @@ class Welcome extends CI_Controller {
         Response::ResponseOK(T("Mensagem enviada com sucesso."))->toJson();
     }
     
+    public function payment_view() {
+        $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
+        $param["lateral_menu"] = $this->load->view('payment_view', '', true);
+        $param["modals"] = $this->load->view('modals', '', true);
+        $this->load->view('message_view', $param);
+    }
+    
     
     //SECONDARY FUNCTIONS----------------------------------------------------------
     public function internal_index($login_token) {
