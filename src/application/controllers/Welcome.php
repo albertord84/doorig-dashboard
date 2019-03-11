@@ -24,6 +24,13 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-client-module-class');
     }
     
+    public function a() {
+        $Client = new Client(1);
+        $Client->load_doorig_info();
+        
+        var_dump($Client);
+    }
+    
     //PRIMARY FUNCTIONS----------------------------------------------------------
     public function index($login_token=NULL) {
         try {

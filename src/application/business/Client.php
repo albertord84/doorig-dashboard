@@ -27,14 +27,17 @@ namespace business {
         public $Pay_id;
         public $Login_token;
         public $ClientModules;
+        public $DoorigInfo;             // Client DOORIG general information Class
 
         /**
          * 
          * @todo Class constructor.
          * 
          */
-        function __construct() {
+        function __construct(int $id = NULL) {
             parent::__construct();
+
+            $this->Id = $id;
 
             $this->ClientModules = new ClientModules($this);
 
@@ -94,7 +97,32 @@ namespace business {
                 $this->Pay_id = $data->pay_id;
                 $this->Login_token = $data->login_token;
             } else {
-                //throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);
+//throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);
+            }
+        }
+
+        public function load_doorig_info(int $id = NULL) {
+            try {
+                $this->Id = $id ? $id : $this->Id;
+                if ($this->Id) {
+                    $url = $GLOBALS['sistem_config']->BASE_SITE_URL . 'welcome/get_doorig_info';
+
+                    $GuzClient = new \GuzzleHttp\Client();
+                    $response = $GuzClient->post($url, [
+                        \GuzzleHttp\RequestOptions::FORM_PARAMS => ['client_id' => $this->Id]
+                    ]);
+
+                    $StatusCode = $response->getStatusCode();
+                    $content = $response->getBody()->getContents();
+                    $content = json_decode($content);
+                    if ($StatusCode == 200 && isset($content->code) && $content->code == 0) {
+                        $this->DoorigInfo = $content->array_object;
+                    }
+                } else {
+                    throw new Exception("Missing client id!!!");
+                }
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
             }
         }
 
@@ -110,7 +138,7 @@ namespace business {
         }
 
         public function insert($pay_id = NULL, $login_token = NULL) {
-            if (Client::exist($email, ClientStatus::ACTIVE)) {  
+            if (Client::exist($email, ClientStatus::ACTIVE)) {
                 throw ErrorCodes::getException(ErrorCodes::EMAIL_ALREADY_EXIST);
             }
             $CI = &get_instance();
@@ -124,7 +152,7 @@ namespace business {
             return $client_id;
         }
 
-        //---------------SIGNIN FUNCTIONS-----------------------------
+//---------------SIGNIN FUNCTIONS-----------------------------
 
         /**
          * 
