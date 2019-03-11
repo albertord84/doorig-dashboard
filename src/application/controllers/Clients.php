@@ -13,18 +13,36 @@ class Clients extends CI_Controller {
         require_once config_item('business-client-class');
     }
 
+    public function get_lateral_menu() {
+        //$client_id = $this->input->post()["client_id"];
+//        $Client = new Client();
+//        $Client->load_data($client_id);
+//        $Client->        
+//        $Client->DoorigInfo->email = "josergm86@gmail.com";        
+//        $param['email'] = $Client->DoorigInfo->email;
+        
+        $param['email'] = "josergm86@gmail.com";
+        
+        $lateral_menu = $this->load->view('lateral_menu', $param, TRUE);
+        print_r($lateral_menu);
+    }
+    
+    public function get_modals() {
+        $modals = $this->load->view("modals", "", TRUE);
+        print_r($modals);
+    }
+
     public function index() {
 
         var_dump("Thanks God!");
-        
+
         $Client = new Client();
         $Client->load_data(1);
         $Client->load_modules(TRUE);
-        
+
         var_dump($Client->ClientModules);
     }
 
 }
-
 ?>
 

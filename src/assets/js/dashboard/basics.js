@@ -6,6 +6,19 @@ var checkpoint_required_code_regular_expression = "^[0-9]{6}$";
 var email_regular_expression = "^[a-zA-Z0-9\._-]+@([a-zA-Z0-9-]{2,}[.])*[a-zA-Z]{2,}$";
 var complete_name_regular_expression = "^[a-z A-Z0-9áÁéÉíÍóÓúÚàÀèÈìÌòÒùÙãÃõÕâÂêÊôÔûÛñ\._]{2,150}$";
 
+var cvv_regular_expression =  "^[0-9]{3,4}$";
+var month_regular_expression = "^[0-10-9]{2,2}$";
+var year_regular_expression = "^[2-20-01-20-9]{4,4}$";            
+var ticket_bank_client_name_regular_expression =  "^[A-Za-z ]{4,50}$";
+var cpf_regular_expression = "^[0-9]{2,11}$";
+var cep_regular_expression = '^[0-9]{8}$';
+var street_address_regular_expression = '^[a-zA-Z0-9. áéíóúãõẽâîô]{5,80}$';
+var neighborhood_address_regular_expression = '^[a-zA-Z0-9. áéíóúãõẽâîô]{2,80}$';
+var municipality_address_regular_expression = '^[a-zA-Z0-9. áéíóúãõẽâîô]{2,80}$';
+var state_address_regular_expression = '^[A-Z]{2}$';
+var house_number_regular_expression = '^[0-9/]{1,7}$';
+var ticket_bank_option_tmp_regular_expression = '^[1-3]{1}$';
+
 function validate_element(element_selector,pattern){
     if(!$(element_selector).val().match(pattern)){
         $(element_selector).css("border", "1px solid red");
@@ -164,6 +177,31 @@ function timeConverter(UNIX_timestamp){
     return time;
 }
 
+$("#verify_cep").click(function () {
+    if(validate_element("#cep",'^[0-9]{8}$')){
+        $.ajax({
+            url: base_url+'index.php/welcome/get_cep_datas',                
+            data: {
+                'cep': $('#cep').val(),
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if(response['success']){
+                    response = response['datas'];
+                    $('#street_address').val(response['logradouro']);
+                    $('#neighborhood_address').val(response['bairro']);
+                    $('#municipality_address').val(response['localidade']);
+                    $('#state_address').val(response['uf']);            
+                } else
+                    modal_alert_message('CEP inválido');
+            }
+    });
+    } else{
+        modal_alert_message('CEP inválido');
+    }
+});
+
 $(document).ready(function(){  
     
     $("#accept_modal_alert_message").click(function () {
@@ -178,13 +216,6 @@ $(document).ready(function(){
         $(location).attr('href', base_url+'index.php/welcome/log_out')
         return false;
     });
-    
-    function display_client_datas(){        
-        $(".client_email").text(client_datas.ClientEmail);        
-        $(".client_photo").prop("src",client_datas.ClientPhotoUrl);        
-    }
-    
-    display_client_datas();
     
  }); 
  

@@ -29,7 +29,6 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
-            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
@@ -61,7 +60,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12" >
                         <div class="card">
-                            <div class="card-body" style="<?php if(($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">
+                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Mais Visibilidade</h5>
                                 </div>
@@ -113,7 +112,7 @@
                     
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["posts"])) echo 'background-color:green;'?>">
+                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["post_stories"])) echo 'background-color:green;'?>">
                                 <div class="d-flex m-b-30 no-block">
                                     <h5 class="card-title m-b-0 align-self-center">Post-Stories</h5>
                                 </div>

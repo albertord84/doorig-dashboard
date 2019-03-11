@@ -93,7 +93,7 @@
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="client_photo" src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user"  /> 
                         <span class="hidden-md-down">
-                            <i class="client_email">-----</i>
+                            <i ><?php echo $email;?></i>
                             &nbsp;
                             <i class="fa fa-angle-down"></i>
                         </span> 
@@ -106,19 +106,13 @@
                                         <img class="client_photo"  src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user">
                                     </div>
                                     <div class="u-text">
-                                        <!--<h4>Steave Jobs</h4>-->
-                                        <p class="text-muted client_email">----</p>
-                                        <!--<a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>-->
+                                        <p class="text-muted"><?php echo $email;?></p>
                                         <a id="lnk_loguot" href=""><i class="fa fa-power-off"></i> Logout</a>
                                     </div>
                                     <div>
                                     </div>
                                 </div>
                             </li>
-                            <!--<li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>-->
                         </ul>
                     </div>
                 </li>
@@ -166,9 +160,9 @@
                 </li>
                 
                 <li> 
-                    <a class="has-arrow waves-effect waves-dark deep-analisys-access disabled1" aria-expanded="false">
+                    <a class="has-arrow waves-effect waves-dark deep-analysis-access disabled1" aria-expanded="false">
                         <i class="icon-Brain-2"></i>
-                        <span class="hide-menu">Deep-Analisys</span>
+                        <span class="hide-menu">Deep-Analysis</span>
                     </a>
                 </li>  
                 

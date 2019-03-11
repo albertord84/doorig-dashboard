@@ -25,12 +25,11 @@ class Welcome extends CI_Controller {
     }
     
     //PRIMARY FUNCTIONS----------------------------------------------------------
-    public function index($login_token) {
+    public function index($login_token=NULL) {
         try {
             $Client=NULL; $ClientDatas=NULL;
             if($this->session->userdata('client')){
                 $Client = unserialize($this->session->userdata('client'));
-                $ClientDatas = unserialize($this->session->userdata('client_datas'));
             }
             else{
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
@@ -45,21 +44,13 @@ class Welcome extends CI_Controller {
                     $Client = new Client();
                     $Client->load_data_by_doorig_client_id($content->ClientId);
                     $Client->load_modules(TRUE);
-                    //2.1. TODO: get the client informations to be displyed in all views
-                    $ClientDatas =(object) array(
-                        "ClientId" => $Client->Id,
-                        "ClientEmail"=>"josergm86@gmail.com",
-                        "ClientPhotoUrl"=> $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."../assets/profile_images/".$Client->Id.".jpg",
-                    );
-                    $this->session->set_userdata('client_datas', serialize($ClientDatas));   
                     $this->session->set_userdata('client', serialize($Client));                     
                 }
             }
             if($Client){
-                $param["client"] = ($Client);
-                $param["client_datas"] = json_encode($ClientDatas);
-                $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
-                $param["modals"] = $this->load->view('modals', '', true);
+                $param["client"] = $Client;
+                $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
+                $param["modals"] = $this->request_modals();
                 $this->load->view('dashboard_view', $param);
             } else{
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
@@ -272,6 +263,31 @@ class Welcome extends CI_Controller {
         } catch (Exception $exc) {
             Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
             return;
+        }
+    }
+    
+    public function request_lateral_menu($client_id) {
+        $GuzClient = new \GuzzleHttp\Client();
+        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."Clients/get_lateral_menu";
+        $response = $GuzClient->post($url, [
+            GuzzleHttp\RequestOptions::FORM_PARAMS => [
+                'client_id' => $client_id
+        ]]);
+        $StatusCode = $response->getStatusCode();
+        $content = $response->getBody()->getContents();
+        if ($StatusCode == 200) {
+            return $content;
+        }
+    }
+    
+    public function request_modals() {
+        $GuzClient = new \GuzzleHttp\Client();
+        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."Clients/get_modals";
+        $response = $GuzClient->get($url);
+        $StatusCode = $response->getStatusCode();
+        $content = $response->getBody()->getContents();
+        if ($StatusCode == 200) {
+            return $content;
         }
     }
 
