@@ -175,7 +175,7 @@ class Welcome extends CI_Controller {
 //            $datas["final_module_id"] = 1;
 //            $client_id = 1;
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
-            $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "/welcome/generate_access_token";
+            $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "welcome/generate_access_token";
             $GuzClient = new \GuzzleHttp\Client();
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::FORM_PARAMS => [
@@ -237,14 +237,7 @@ class Welcome extends CI_Controller {
     public function confirm_access_token() {
         //2. Save MD5 to validate login from dashboard
         $datas = $this->input->post();
-        //var_dump($datas);
-
-
         try {
-
-            //$datas["access_token"] = "a1fe9db8763995f8ef18377c78c63ddb";
-            //$datas["client_id"] = 1;
-            //$datas["module_id"] = 5;
             //1. Get cliente & module data
             // @TODO Alberto: Load contreted modules
             $Client = new Client();
