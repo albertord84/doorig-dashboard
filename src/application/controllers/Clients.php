@@ -14,14 +14,10 @@ class Clients extends CI_Controller {
     }
 
     public function get_lateral_menu() {
-        //$client_id = $this->input->post()["client_id"];
-//        $Client = new Client();
-//        $Client->load_data($client_id);
-//        $Client->        
-//        $Client->DoorigInfo->email = "josergm86@gmail.com";        
-//        $param['email'] = $Client->DoorigInfo->email;
-        
-        $param['email'] = "josergm86@gmail.com";
+        $client_id = $this->input->post()["client_id"];
+        $Client = new Client($client_id);
+        $Client->load_doorig_info();
+        $param['email'] = $Client->DoorigInfo->Email;
         
         $lateral_menu = $this->load->view('lateral_menu', $param, TRUE);
         print_r($lateral_menu);
