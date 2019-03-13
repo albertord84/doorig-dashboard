@@ -18,8 +18,8 @@ namespace business {
     class ClientModule extends Business {
 
         public $Id;
-        private $Client; // Client Reference
-        private $Module; // Module Reference
+        public $Client; // Client Reference
+        public $Module; // Module Reference
         public $Active;
         public $Init_date;
         public $End_date;

@@ -31,6 +31,7 @@ namespace business {
 
             $CI = &get_instance();
             $CI->load->model("Clients_modules_model");
+            $CI->Clients_modules_model->set_client_id($client->Id);
 
             $this->Client = $client;
             $this->Modules = array();
@@ -40,9 +41,9 @@ namespace business {
          * 
          * @throws Exception
          */
-        public function load_data(int $active) {
+        public function load_data(int $active = 1) {
             $CI = &get_instance();
-            $data = $CI->Clients_modules_model->get_all($this->Client->Id);
+            $data = $CI->Clients_modules_model->get_all($active);
 
             $this->fill_data($data);
         }
@@ -51,7 +52,7 @@ namespace business {
             if (count($modules)) {
                 foreach ($modules as $key => $client_module) {
                     $Module = new Module();
-                    $Module->load_data($client_module->id);
+                    $Module->load_data($client_module->module_id);
                     $this->Modules[$Module->Name] = new ClientModule($this->Client, $Module);
                     $this->Modules[$Module->Name]->fill_data($client_module);
                     //$this->Modules[$key] = new ClientModule($this->Client, $Module);
