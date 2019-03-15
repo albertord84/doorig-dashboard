@@ -204,9 +204,7 @@ class Welcome extends CI_Controller {
         //2. Save MD5 to validate login from dashboard
         $datas = $this->input->post();
 
-
         try {
-
             //$datas["module_id"] = 5;
             //$datas["client_id"] = 1;
             //1. Generate login token
@@ -223,7 +221,7 @@ class Welcome extends CI_Controller {
             //3. Update cliente modules with $login_token
             $ClientModule = new ClientModule($Client, $Module);
             $ClientModule->load_data();
-            $ClientModule->update($ClientModule->Id, null, null, null, null, null, $login_token);
+            $ClientModule->set_login_token($login_token);
 
             //4. retornar el access_token
             $Response = new ResponseLoginToken($login_token, "", $Client->Id);

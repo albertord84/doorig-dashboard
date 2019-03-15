@@ -68,9 +68,19 @@ namespace business {
             }
         }
 
-        public function update($id, $client_id = NULL, $module_id = NULL, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
+        public function set_login_token($login_token) {
             $CI = &get_instance();
-            $client_module_id = $CI->Clients_modules_model->update($id, $client_id, $module_id, $active, $init_date, $end_date, $login_token);
+            $CI->Clients_modules_model->update($this->Id, NULL, NULL, NULL, NULL, NULL, $login_token);
+        }
+
+        static public function update($id, $client_id = NULL, $module_id = NULL, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
+            $CI = &get_instance();
+            $CI->Clients_modules_model->update($id, $client_id, $module_id, $active, $init_date, $end_date, $login_token);
+        }
+
+        public function setActive(bool $active = TRUE) {
+            $CI = &get_instance();
+            $client_module_id = $CI->Clients_modules_model->update($this->Id, $client_id = NULL, $module_id = NULL, $active, $init_date = time(), $end_date = NULL, $login_token = NULL);
             $this->load_data($client_module_id);
             return $client_module_id;
         }
