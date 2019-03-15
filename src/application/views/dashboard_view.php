@@ -47,17 +47,25 @@
                 <!-- welcome  -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Bem-vindo ao seu Dashboard!</h3>
-                        <ol class="breadcrumb">
+                        <!--<h3 class="text-themecolor">Bem-vindo ao seu Dashboard!</h3>-->
+<!--                        <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                             <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
+                        </ol>-->
                     </div>                        
                 </div>
 
 
+                <!-- HEADER -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1>DASHBOARD</h1>
+                    </div>
+                </div>
                 <!-- modules  -->
                 <div class="row">
+                    
+                    
                     <div class="col-lg-6 col-md-12" >
                         <div class="card">
                             <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">

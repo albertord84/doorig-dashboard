@@ -36,49 +36,82 @@
 
     <body class="fix-header fix-sidebar card-no-border">
         
+        
         <!-- Main wrapper -->
         <div id="main-wrapper">            
             <?php echo $lateral_menu;?>
         </div>    
         <!-- Page wrapper  -->
         <div class="page-wrapper">
+            
             <!-- Container fluid  -->
             <div class="container-fluid">
-                <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Mensagem</li>
-                        </ol>
-                    </div>                        
+                
+                <!-- HEADER -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1>PAGAMENTO</h1>
+                    </div>
                 </div>
-                <!-- End Bread crumb and right sidebar toggle -->
-
 
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
+                                <div id="payment_form" class="row">
                                     <div class="col-lg-2 col-md-12"></div>
                                     <div class="col-lg-8 col-md-12">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="sec-title text-center">
-                                                        <h2>Compor Nova Mensagem</h2>
+                                                        <h2>Adicione seus dados de pagamento</h2>
                                                         <span class="border"></span>
                                                     </div>
                                                 </div>                                        
                                             </div>
                                             <div class="card-body">
                                                 <div class="form-group">
-                                                    <input id="contact_subject" class="form-control" placeholder="Assunto:">
+                                                    <label>Seu nome como no cartão (*):</label>
+                                                    <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase; cursor: not-allowed;">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-lg-8 col-md-12">
+                                                        <label>Número do cartão (*):</label>
+                                                        <input id="cc-number" type="text"  class="form-control" placeholder="">
+                                                    </div>
+                                                    <div class="form-group col-lg-4 col-md-12">
+                                                        <label>CVC / CVV (*):</label>
+                                                        <input id="cc-cvv" type="text" class="form-control" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6 col-md-12">
+                                                        <label>Mês de validade (*):</label>
+                                                        <select id="cc-month"  class="form-control" placeholder="">
+                                                            <option>01</option><option>02</option><option>03</option><option>04</option>
+                                                            <option>05</option><option>06</option><option>07</option><option>08</option>
+                                                            <option>09</option><option>10</option><option>11</option><option>12</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-lg-6 col-md-12">
+                                                        <label>Ano de validade (*):</label>
+                                                        <select id="cc-year"  class="form-control" placeholder="">
+                                                            <option>2019</option><option>2020</option><option>2021</option><option>2021</option>
+                                                            <option>2023</option><option>2024</option><option>2025</option><option>2026</option>
+                                                            <option>2027</option><option>2028</option><option>2029</option><option>2030</option>
+                                                            <option>2031</option><option>2032</option><option>2033</option><option>2034</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <textarea id="contact_message" class="textarea_editor form-control" rows="10" placeholder="Mensagem ..."></textarea>
-                                                </div> 
+                                                    <label>Tem algum código promocional?</label>
+                                                    <input id="promotional-code" type="text" autofocus="" class="form-control" placeholder="">
+                                                </div>
+                                                <div class="text-right">
+                                                    <label> (*) Campos obrigatórios</label>
+                                                </div>
                                                 <div class="text-center">
-                                                    <button id="" type="button" style="min-width: 150px" class="btn btn-info m-t-20"><i class="fa fa-envelope-o"></i> Enviar</button>
+                                                    <button id="payment_btn" type="button" style="min-width: 150px" class="btn btn-info m-t-20"><i class="fa fa-envelope-o"></i> Enviar</button>
                                                 </div>
                                             </div>
                                     </div>
@@ -93,7 +126,7 @@
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer">
+            <footer class="footer text-center">
                 DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>
             <!-- End footer -->

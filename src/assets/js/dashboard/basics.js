@@ -8,7 +8,17 @@ var complete_name_regular_expression = "^[a-z A-Z0-9áÁéÉíÍóÓúÚàÀèÈ
 
 var cvv_regular_expression =  "^[0-9]{3,4}$";
 var month_regular_expression = "^[0-10-9]{2,2}$";
-var year_regular_expression = "^[2-20-01-20-9]{4,4}$";            
+var year_regular_expression = "^[2-20-01-20-9]{4,4}$";
+var cc_name_regular_expression = "^[A-Z ]{4,50}$";
+
+var Visa_regular_expression = "^(?:4[0-9]{12}(?:[0-9]{3})?)$"; // Validating a Visa card starting with 4, length 13 or 16 digits.
+var MasterCard_regular_expression = "^(?:5[1-5][0-9]{14})$"; // Validating a MasterCard starting with 51 through 55, length 16 digits.
+var AmericanExpress_regular_expression = "^(?:3[47][0-9]{13})$"; // Validating a AmericanExpress credit card starting with 34 or 37, length 15 digits.
+var Discover_regular_expression = "^(?:6(?:011|5[0-9][0-9])[0-9]{12})$"; // Validating a Discover card starting with 6011, length 16 digits or starting with 5, length 15 digits.
+var DinersClub_regular_expression = "^(?:3(?:0[0-5]|[68][0-9])[0-9]{11})$"; // Validating a DinersClub card starting with 300 through 305, 36, or 38, length 14 digits.
+var Elo_regular_expression = "^(?:((((636368)|(438935)|(504175)|(451416)|(636297))[0-9]{0,10})|((5067)|(4576)|(4011))[0-9]{0,12}))$"; // Validating a Elo credit card
+var Hypercard_regular_expression = "^(?:(606282[0-9]{10}([0-9]{3})?)|(3841[0-9]{15}))$"; // Validating a Hypercard
+
 var ticket_bank_client_name_regular_expression =  "^[A-Za-z ]{4,50}$";
 var cpf_regular_expression = "^[0-9]{2,11}$";
 var cep_regular_expression = '^[0-9]{8}$';
@@ -18,6 +28,13 @@ var municipality_address_regular_expression = '^[a-zA-Z0-9. áéíóúãõẽâ�
 var state_address_regular_expression = '^[A-Z]{2}$';
 var house_number_regular_expression = '^[0-9/]{1,7}$';
 var ticket_bank_option_tmp_regular_expression = '^[1-3]{1}$';
+
+(function ($) {
+    $.fn.replaceClass = function (pFromClass, pToClass) {
+        return this.removeClass(pFromClass).addClass(pToClass);
+    };
+}(jQuery));
+
 
 function validate_element(element_selector,pattern){
     if(!$(element_selector).val().match(pattern)){
