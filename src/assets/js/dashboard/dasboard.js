@@ -64,35 +64,87 @@ $(document).ready(function(){
         modal_alert_message("acessando deep-analysis"); return false;
     });
     
-    $(".payment-access").click(function(){        
-        modal_alert_message("acessando payment"); return false;
+    $(".payment-access").click(function(){
+        if(module=="dashboard"){
+            $(location).attr('href', base_url+"index.php/welcome/payment_view/");
+        }else{            
+            var final_url = base_url.replace(module,"dashboard");
+            //var btn =this;
+            $.ajax({ 
+                url : base_url+'index.php/welcome/call_to_generate_access_token',
+                data :{
+                    "module_id":0 // go to dashboard
+                },
+                type : 'POST',
+                dataType : 'json',
+                success : function(response){
+                    //spinner_stop(btn);
+                    if(response.code===0){
+                        $(location).attr('href', final_url+"index.php/welcome/payment_view/"+response.LoginToken+"/"+response.ClientId);
+                    } else
+                        modal_alert_message(response.message);                    
+                },
+                error : function(xhr, status) {
+                    //spinner_stop(btn);
+                    modal_alert_message('Erro enviando a mensagem, tente depois...');                    
+                }
+            });
+        }        
     });
     
     $(".sumarize-account-access").click(function(){        
-        modal_alert_message("acessando sumarize-account"); return false;
+        if(module=="dashboard"){
+            $(location).attr('href', base_url+"index.php/welcome/sumarize_view/");
+        }else{       
+            var final_url = base_url.replace(module,"dashboard");
+            //var btn =this;
+            $.ajax({ 
+                url : base_url+'index.php/welcome/call_to_generate_access_token',
+                data :{
+                    "module_id":0 // go to dashboard
+                },
+                type : 'POST',
+                dataType : 'json',
+                success : function(response){
+                    //spinner_stop(btn);
+                    if(response.code===0){
+                        $(location).attr('href', final_url+"index.php/welcome/sumarize_view/"+response.LoginToken+"/"+response.ClientId);
+                    } else
+                        modal_alert_message(response.message);                    
+                },
+                error : function(xhr, status) {
+                    //spinner_stop(btn);
+                    modal_alert_message('Erro enviando a mensagem, tente depois...');                    
+                }
+            });             
+        }
     });
             
     $(".message-access").click(function(){
-        var final_url = base_url.replace(module,"dashboard");
-        //var btn =this;
-        $.ajax({ 
-            url : base_url+'index.php/welcome/call_to_generate_access_token',
-            data :{
-                "module_id":0 // go to dashboard
-            },
-            type : 'POST',
-            dataType : 'json',
-            success : function(response){
-                //spinner_stop(btn);
-                if(response.code===0){
-                    $(location).attr('href', final_url+"index.php/welcome/message_view/"+response.LoginToken+"/"+response.ClientId);
-                } else
-                    modal_alert_message(response.message);                    
-            },
-            error : function(xhr, status) {
-                //spinner_stop(btn);
-                modal_alert_message('Erro enviando a mensagem, tente depois...');                    
-            }
-        }); 
+        if(module=="dashboard"){
+            $(location).attr('href', base_url+"index.php/welcome/payment_view/");
+        }else{       
+            var final_url = base_url.replace(module,"dashboard");
+            //var btn =this;
+            $.ajax({ 
+                url : base_url+'index.php/welcome/call_to_generate_access_token',
+                data :{
+                    "module_id":0 // go to dashboard
+                },
+                type : 'POST',
+                dataType : 'json',
+                success : function(response){
+                    //spinner_stop(btn);
+                    if(response.code===0){
+                        $(location).attr('href', final_url+"index.php/welcome/message_view/"+response.LoginToken+"/"+response.ClientId);
+                    } else
+                        modal_alert_message(response.message);                    
+                },
+                error : function(xhr, status) {
+                    //spinner_stop(btn);
+                    modal_alert_message('Erro enviando a mensagem, tente depois...');                    
+                }
+            });             
+        }
     });
 });
