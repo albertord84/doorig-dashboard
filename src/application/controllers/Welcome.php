@@ -24,14 +24,12 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-client-module-class');
     }
     
-    public function a() {
-        $Client = new Client(1);
-        $Client->load_doorig_info();
-        
+    //PRIMARY FUNCTIONS----------------------------------------------------------
+    public function aaa() {
+        $Client = unserialize($this->session->userdata('client'));
         var_dump($Client);
     }
     
-    //PRIMARY FUNCTIONS----------------------------------------------------------
     public function index($login_token=NULL) {
         try {
             $Client=NULL; $ClientDatas=NULL;
@@ -93,6 +91,22 @@ class Welcome extends CI_Controller {
     }
     
     public function payment_view() {
+        $Client = unserialize($this->session->userdata('client'));
+        $param["client_datas"] = json_encode($Client);
+        $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
+        $param["modals"] = $this->request_modals();
+        $this->load->view('payment_view', $param);
+    }
+    
+    public function payment() {
+        $datas = $this->input->post();
+        
+        $Client_id = unserialize($this->session->userdata('client'))->Id;
+        
+        return Response::ResponseOK()->toJson();
+    }
+    
+    public function sumarize_view() {
         $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
         $param["lateral_menu"] = $this->load->view('payment_view', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
