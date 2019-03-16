@@ -56,6 +56,19 @@ namespace business {
             $this->fill_data($data);
         }
 
+        /**
+         * 
+         * @throws Exception
+         */
+        public function load_data_by_id(int $client_module_id) {
+            $CI = &get_instance();
+            $data = $CI->Clients_modules_model->get_by_id($client_module_id);
+            if ($data == null) {
+                throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);
+            }
+            $this->fill_data($data);
+        }
+
         public function fill_data(\stdClass $data = NULL) {
             if ($data) {
                 $this->Id = $data->id;
@@ -84,6 +97,18 @@ namespace business {
             $this->load_data($client_module_id);
             return $client_module_id;
         }
+        
+        /**
+         *  
+         */
+        static function save($client_id = NULL, $module_id = NULL, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
+            $CI = &get_instance();
+            $CI->load->model('Clients_modules_model');
+
+            $id = $CI->Clients_modules_model->save($client_id, $module_id, $active, $start_date = (string) time());
+
+            return $id;
+        }        
 
     }
 

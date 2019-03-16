@@ -47,8 +47,14 @@ class Welcome extends CI_Controller {
                 $content = json_decode($content);                
                 if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {                
                     $Client = new Client();
-                    $Client->load_data_by_doorig_client_id($content->ClientId);
+                    $client_id = $content->ClientId;
+                    if ($content->NewClient)
+                        $Client->insert_new_doorig_client($content->ClientId);
+                    $Client->load_data($client_id);
                     $Client->load_modules(TRUE);
+                    
+                    // Load DOORIG INFO
+                    
                     $this->session->set_userdata('client', serialize($Client));                     
                 }
             }

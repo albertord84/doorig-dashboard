@@ -85,7 +85,7 @@ namespace business {
             $CI = &get_instance();
             $data = $CI->Clients_model->get_by_doorig_client_id($client_id);
             if ($data == null) {
-                throw ErrorCodes::getException(ErrorCodes::VALIDATION_TOKEN_NOT_FOUND);
+                throw ErrorCodes::getException(ErrorCodes::CLIENT_ID_NOT_FOUND);
             }
 
             $this->fill_data($data);
@@ -137,16 +137,34 @@ namespace business {
             $this->ClientModules->load_data($active);
         }
 
-        public function insert($pay_id = NULL, $login_token = NULL) {
-            if (Client::exist($email, ClientStatus::ACTIVE)) {
-                throw ErrorCodes::getException(ErrorCodes::EMAIL_ALREADY_EXIST);
-            }
+        public function insert_new_doorig_client(int $client_id) {
+            $this->insert($client_id);
+            
+            $Module = new Module();
+            $Client = new Client();
+            $ClientModule = new ClientModule($Client, $Module);
+            $ClientModule->save($client_id, Module::dashboard, TRUE);
+            $ClientModule->save($client_id, Module::visibility, FALSE);
+            $ClientModule->save($client_id, Module::directs, FALSE);
+            $ClientModule->save($client_id, Module::post_stories, FALSE);
+            $ClientModule->save($client_id, Module::statistic, FALSE);
+            $ClientModule->save($client_id, Module::leads, FALSE);
+            
             $CI = &get_instance();
-            $client_id = $CI->Clients_model->save($pay_id, $login_token);
+            $client_id = $CI->Clients_model->save($client_id, $pay_id, $login_token);
             return $client_id;
         }
 
-        public function update($id, $pay_id = NULL, $login_token = NULL) {
+        public function insert(int $id, int $pay_id = NULL, string $login_token = NULL) {
+            if (Client::exist($id, ClientStatus::ACTIVE)) {
+                throw ErrorCodes::getException(ErrorCodes::DATA_ALREADY_EXIST);
+            }
+            $CI = &get_instance();
+            $client_id = $CI->Clients_model->save($id, $pay_id, $login_token);
+            return $client_id;
+        }
+
+        public function update(int $id, int $pay_id = NULL, string $login_token = NULL) {
             $CI = &get_instance();
             $client_id = $CI->Clients_model->update($id, $pay_id, $login_token);
             return $client_id;
