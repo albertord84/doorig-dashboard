@@ -75,10 +75,11 @@ $(document).ready(function(){
                     'cc-name': $('#cc-name').val(),
                     'cc-month': $('#cc-month').val(),
                     'cc-year': $('#cc-year').val(),
+                    'cc-cpf': $('#cc-cpf').val(),
                 };
                 datas['promotional_code']=$('#promotional-code').val();
                 $.ajax({
-                    url: base_url + 'index.php/welcome/payment/',
+                    url: base_url + 'index.php/Payment/payment/',
                     data: datas,
                     type: 'POST',
                     dataType: 'json',

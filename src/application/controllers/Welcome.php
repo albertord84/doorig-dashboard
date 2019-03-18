@@ -111,15 +111,7 @@ class Welcome extends CI_Controller {
         $param["modals"] = $this->request_modals();
         $this->load->view('payment_view', $param);
     }
-    
-    public function payment() {
-        $datas = $this->input->post();
-        
-        $Client_id = unserialize($this->session->userdata('client'))->Id;
-        
-        return Response::ResponseOK()->toJson();
-    }
-    
+           
     public function sumarize_view() {
         $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
         $param["lateral_menu"] = $this->load->view('payment_view', '', true);

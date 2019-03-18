@@ -37,7 +37,6 @@ $(document).ready(function(){
             type : 'POST',
             dataType : 'json',
             success : function(response){
-                console.log(response);
                 //spinner_stop(btn);
                 if(response.code===0){
                     $(location).attr('href', final_url+"index.php/welcome/index/"+response.LoginToken+"/"+response.ClientId);
@@ -48,20 +47,21 @@ $(document).ready(function(){
                 //spinner_stop(btn);
                 modal_alert_message('Erro enviando a mensagem, tente depois...');                    
             }
-        });       
+        });
     });
     
     $(".post-stories-access").click(function(){        
+        modal_success_message("Módulo em desenvolvimento"); return false;
         var final_url = base_url.replace(module,"posting");
         $(location).attr('href', final_url+"index.php/welcome/index/");
     });
     
     $(".directs-access").click(function(){        
-        modal_alert_message("acessando directs"); return false;
+        modal_success_message("Módulo em desenvolvimento"); return false;
     });
     
     $(".deep-analysis-access").click(function(){        
-        modal_alert_message("acessando deep-analysis"); return false;
+        modal_success_message("Módulo em desenvolvimento"); return false;
     });
     
     $(".payment-access").click(function(){

@@ -72,7 +72,7 @@
                                                 <div class="form-group">
                                                     <label>Seu nome como no cartão (*):</label>
                                                     <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase; cursor: not-allowed;">
-                                                </div>
+                                                </div>                                                
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 col-md-12">
                                                         <label>Número do cartão (*):</label>
@@ -101,6 +101,10 @@
                                                             <option>2031</option><option>2032</option><option>2033</option><option>2034</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Seu CPF:</label>
+                                                    <input id="cc-cpf" type="text" class="form-control cpf">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tem algum código promocional?</label>
