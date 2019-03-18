@@ -13,7 +13,7 @@ $(document).ready(function(){
           if(contact_subject && message){
             //var l = Ladda.create(this);  l.start(); l.start();
             $.ajax({
-                url : base_url+'index.php/welcome/message',
+                url : base_url+'index.php/welcome/contact_us',
                 data :{ 
                         'subject':$("#contact_subject").val(),
                         'message':$("#contact_message").val()

@@ -29,7 +29,6 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
-            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
@@ -165,8 +164,6 @@
         <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
-        
     </body>
 </html>

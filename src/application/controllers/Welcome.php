@@ -35,6 +35,7 @@ class Welcome extends CI_Controller {
             $Client=NULL; $ClientDatas=NULL;
             if($this->session->userdata('client')){
                 $Client = unserialize($this->session->userdata('client'));
+                //var_dump($Client);
             }
             else{
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
@@ -74,14 +75,20 @@ class Welcome extends CI_Controller {
     }
     
     public function message_view() {
-        $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
-        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
-        $param["modals"] = $this->load->view('modals', '', true);
+        $Client = unserialize($this->session->userdata('client'));
+        $param["client_datas"] = json_encode($Client);
+        $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
+        $param["modals"] = $this->request_modals();
         $this->load->view('message_view', $param);
     }
-
+    
     public function contact_us() {
-        $datas = $this->input->post();
+        //@TODO: hacer esto funcionar
+        $datas = $this->input->post(); 
+        $datas['contact_subject'];
+        $datas['contact_message'];
+        $Client = unserialize($this->session->userdata('client'));
+        $Client->Id;
         try {
             Client::send_contact_us($datas["email"], $datas["username"], $datas["message"], $datas["company"], $datas["phone"]);
         } catch (\Exception $e) {
