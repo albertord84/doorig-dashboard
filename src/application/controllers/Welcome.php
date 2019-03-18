@@ -54,6 +54,7 @@ class Welcome extends CI_Controller {
                     $Client->load_modules(TRUE);
                     
                     // Load DOORIG INFO
+                    @$Client->load_doorig_info();
                     
                     $this->session->set_userdata('client', serialize($Client));                     
                 }

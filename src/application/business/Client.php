@@ -138,25 +138,26 @@ namespace business {
         }
 
         public function insert_new_doorig_client(int $client_id) {
-            $this->insert($client_id);
-            
-            $Module = new Module();
-            $Client = new Client();
-            $ClientModule = new ClientModule($Client, $Module);
-            $ClientModule->save($client_id, Module::dashboard, TRUE);
-            $ClientModule->save($client_id, Module::visibility, FALSE);
-            $ClientModule->save($client_id, Module::directs, FALSE);
-            $ClientModule->save($client_id, Module::post_stories, FALSE);
-            $ClientModule->save($client_id, Module::statistic, FALSE);
-            $ClientModule->save($client_id, Module::leads, FALSE);
-            
-            $CI = &get_instance();
-            $client_id = $CI->Clients_model->save($client_id, $pay_id, $login_token);
-            return $client_id;
+            if (!Client::exist($client_id)) {
+                $client_id = $this->insert($client_id);
+
+                $Module = new Module();
+                $Client = new Client();
+                $ClientModule = new ClientModule($Client, $Module);
+                $ClientModule->save($client_id, Module::dashboard, TRUE);
+                $ClientModule->save($client_id, Module::visibility, FALSE);
+                $ClientModule->save($client_id, Module::directs, FALSE);
+                $ClientModule->save($client_id, Module::post_stories, FALSE);
+                $ClientModule->save($client_id, Module::statistic, FALSE);
+                $ClientModule->save($client_id, Module::leads, FALSE);
+
+                return $client_id;
+            }
+            return FALSE;
         }
 
         public function insert(int $id, int $pay_id = NULL, string $login_token = NULL) {
-            if (Client::exist($id, ClientStatus::ACTIVE)) {
+            if (Client::exist($id)) {
                 throw ErrorCodes::getException(ErrorCodes::DATA_ALREADY_EXIST);
             }
             $CI = &get_instance();
@@ -179,6 +180,18 @@ namespace business {
         static function get_clients() {
             $CI = &get_instance();
             return $CI->Clients_model->get_all();
+        }
+
+        static function exist(int $id) {
+            try {
+                $Client = new Client($id);
+                $Client->load_data($id);
+                return TRUE;
+            } catch (\Exception $exc) {
+                //echo $exc->getTraceAsString();
+            }
+
+            return FALSE;
         }
 
     }
