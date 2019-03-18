@@ -150,7 +150,7 @@ namespace business {
                 $ClientModule->save($client_id, Module::post_stories, FALSE);
                 $ClientModule->save($client_id, Module::statistic, FALSE);
                 $ClientModule->save($client_id, Module::leads, FALSE);
-
+                
                 return $client_id;
             }
             return FALSE;

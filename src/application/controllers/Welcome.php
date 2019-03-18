@@ -23,20 +23,18 @@ class Welcome extends CI_Controller {
         require_once config_item('business-response-login-token-class');
         require_once config_item('business-response-client-module-class');
     }
-    
+
     //PRIMARY FUNCTIONS----------------------------------------------------------
     public function aaa() {
         $Client = unserialize($this->session->userdata('client'));
         var_dump($Client);
     }
-    
-    public function index($login_token=NULL) {
+
+    public function index($login_token = NULL) {
         try {
-            $Client=NULL; $ClientDatas=NULL;
-            if($this->session->userdata('client')){
-                $Client = unserialize($this->session->userdata('client'));
-            }
-            else{
+            $Client = NULL;
+            if ($login_token) {
+                $this->session->set_userdata('client', NULL);
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
                 $GuzClient = new \GuzzleHttp\Client();
                 $response = $GuzClient->post($url, [
@@ -44,27 +42,29 @@ class Welcome extends CI_Controller {
                 ]);
                 $StatusCode = $response->getStatusCode();
                 $content = $response->getBody()->getContents();
-                $content = json_decode($content);                
-                if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {                
+                $content = json_decode($content);
+                if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {
                     $Client = new Client();
                     $client_id = $content->ClientId;
                     if ($content->NewClient)
                         $Client->insert_new_doorig_client($content->ClientId);
                     $Client->load_data($client_id);
                     $Client->load_modules(TRUE);
-                    
+
                     // Load DOORIG INFO
                     @$Client->load_doorig_info();
-                    
-                    $this->session->set_userdata('client', serialize($Client));                     
+
+                    $this->session->set_userdata('client', serialize($Client));
                 }
+            } else if ($this->session->userdata('client')) {
+                $Client = unserialize($this->session->userdata('client'));
             }
-            if($Client){
+            if ($Client) {
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
                 $this->load->view('dashboard_view', $param);
-            } else{
+            } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
         } catch (Exception $exc) {
@@ -72,14 +72,14 @@ class Welcome extends CI_Controller {
             echo $exc->getMessage();
         }
     }
-    
+
     public function log_out() {
         //$this->load->model('class/user_model');
         //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
         $this->session->sess_destroy();
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
-    
+
     public function message_view() {
         $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
         $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
@@ -96,7 +96,7 @@ class Welcome extends CI_Controller {
         }
         Response::ResponseOK(T("Mensagem enviada com sucesso."))->toJson();
     }
-    
+
     public function payment_view() {
         $Client = unserialize($this->session->userdata('client'));
         $param["client_datas"] = json_encode($Client);
@@ -104,23 +104,22 @@ class Welcome extends CI_Controller {
         $param["modals"] = $this->request_modals();
         $this->load->view('payment_view', $param);
     }
-    
+
     public function payment() {
         $datas = $this->input->post();
-        
+
         $Client_id = unserialize($this->session->userdata('client'))->Id;
-        
+
         return Response::ResponseOK()->toJson();
     }
-    
+
     public function sumarize_view() {
         $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
         $param["lateral_menu"] = $this->load->view('payment_view', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
         $this->load->view('message_view', $param);
     }
-    
-    
+
     //SECONDARY FUNCTIONS----------------------------------------------------------
     public function internal_index($login_token) {
         try {
@@ -185,7 +184,7 @@ class Welcome extends CI_Controller {
             print_r($responseBodyAsString);
         }
     }
-    
+
     public function call_to_generate_access_token() {
         //esta funcion deve estar en todfos los módulos
         $datas = $this->input->post();
@@ -284,10 +283,10 @@ class Welcome extends CI_Controller {
             return;
         }
     }
-    
+
     public function request_lateral_menu($client_id) {
         $GuzClient = new \GuzzleHttp\Client();
-        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."Clients/get_lateral_menu";
+        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_lateral_menu";
         $response = $GuzClient->post($url, [
             GuzzleHttp\RequestOptions::FORM_PARAMS => [
                 'client_id' => $client_id
@@ -298,10 +297,10 @@ class Welcome extends CI_Controller {
             return $content;
         }
     }
-    
+
     public function request_modals() {
         $GuzClient = new \GuzzleHttp\Client();
-        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL."Clients/get_modals";
+        $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_modals";
         $response = $GuzClient->get($url);
         $StatusCode = $response->getStatusCode();
         $content = $response->getBody()->getContents();
