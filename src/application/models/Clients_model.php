@@ -23,8 +23,9 @@ class Clients_model extends CI_Model {
         parent::construct();
     }
 
-    function save($pay_id, $login_token) {
+    function save($id, $pay_id = NULL, $login_token = NULL) {
 
+        $this->id = $id;
         $this->pay_id = $pay_id;
         $this->login_token = $login_token;
 
@@ -41,10 +42,12 @@ class Clients_model extends CI_Model {
         $this->db->delete('clients', array('id' => $id));
     }
 
-    function update($id, $pay_id, $login_token) {
+    function update($id, $pay_id = NULL, $login_token = NULL) {
 
-        $this->pay_id = $pay_id;
-        $this->login_token = $login_token;
+        if ($pay_id)
+            $this->pay_id = $pay_id;
+        if ($login_token)
+            $this->login_token = $login_token;
 
 
         $this->db->update('clients', $this, array('id' => $id));

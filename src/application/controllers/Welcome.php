@@ -48,8 +48,15 @@ class Welcome extends CI_Controller {
                 $content = json_decode($content);                
                 if ($StatusCode == 200 && isset($content->code) && $content->code === 0) {                
                     $Client = new Client();
-                    $Client->load_data_by_doorig_client_id($content->ClientId);
+                    $client_id = $content->ClientId;
+                    if ($content->NewClient)
+                        $Client->insert_new_doorig_client($content->ClientId);
+                    $Client->load_data($client_id);
                     $Client->load_modules(TRUE);
+                    
+                    // Load DOORIG INFO
+                    @$Client->load_doorig_info();
+                    
                     $this->session->set_userdata('client', serialize($Client));                     
                 }
             }
@@ -225,9 +232,7 @@ class Welcome extends CI_Controller {
         //2. Save MD5 to validate login from dashboard
         $datas = $this->input->post();
 
-
         try {
-
             //$datas["module_id"] = 5;
             //$datas["client_id"] = 1;
             //1. Generate login token
@@ -244,7 +249,7 @@ class Welcome extends CI_Controller {
             //3. Update cliente modules with $login_token
             $ClientModule = new ClientModule($Client, $Module);
             $ClientModule->load_data();
-            $ClientModule->update($ClientModule->Id, null, null, null, null, null, $login_token);
+            $ClientModule->set_login_token($login_token);
 
             //4. retornar el access_token
             $Response = new ResponseLoginToken($login_token, "", $Client->Id);

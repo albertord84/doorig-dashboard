@@ -63,11 +63,11 @@ class Gmail {
         $company = urlencode($company);
         $phone = urlencode($phone);
         
-        $this->CI->email->Subject = T('Contact Us: ' . $username);
+        $this->CI->email->subject(T('Contact Us: ' . $username));
         
         $lang = $GLOBALS['sistem_config']->LANGUAGE;
-        //$test = "http://" . $_SERVER['SERVER_NAME'] . "/resources/$lang/emails/contact_form.php?username=$username&message=$message&instapass=$company&phone=$phone";
-        $body = @file_get_contents("http://" . $_SERVER['SERVER_NAME'] . "/resources/$lang/emails/contact_form.php?useremail=$useremail&username=$username&message=$message&company=$company&phone=$phone");
+        $url = base_url("resources/$lang/emails/contact_form.php?useremail=$useremail&username=$username&message=$message&company=$company&phone=$phone");
+        $body = @file_get_contents($url);
         $this->CI->email->message($body);
         
         $this->CI->email->AltBody = 'Contact Us';
