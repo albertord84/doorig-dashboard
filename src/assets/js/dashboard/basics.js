@@ -35,7 +35,6 @@ var ticket_bank_option_tmp_regular_expression = '^[1-3]{1}$';
     };
 }(jQuery));
 
-
 function validate_element(element_selector,pattern){
     if(!$(element_selector).val().match(pattern)){
         $(element_selector).css("border", "1px solid red");
@@ -68,8 +67,8 @@ function validate_equals(element_selector, element_selector2){
 
 function validate_cpf(element_selector, pattern) {
     var cpf=$(element_selector).val();
+    cpf = cpf.replace(/[^\d]+/g,'');    
     if(cpf.match(pattern)){
-        cpf = cpf.replace(/[^\d]+/g,'');    
         if(cpf == '') {
             $(element_selector).css("border", "1px solid red");
             return false;

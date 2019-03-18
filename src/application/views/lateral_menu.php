@@ -35,7 +35,7 @@
             <!-- User profile -->
             <ul class="navbar-nav my-lg-0" >
                 <!-- Comment -->
-                <li class="nav-item dropdown">
+<!--                <li class="nav-item dropdown">
                     <a style="padding-top:15px; margin-top:0px; height:50px" class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-Bell"></i>
                         <div class="notify" > 
                             <span class="heartbit" style="margin-top: 12px"></span> 
@@ -76,9 +76,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>                            
+                </li>                            -->
                 <!-- Language -->
-                <li class="nav-item dropdown">
+<!--                <li class="nav-item dropdown">
                     <a style="padding-top:15px; margin-top:0px; height:50px" class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="flag-icon flag-icon-us"></i>
                     </a>
@@ -87,7 +87,7 @@
                         <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
                         <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Español</a>
                     </div>
-                </li>                            
+                </li>                            -->
                 <!-- Profile -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

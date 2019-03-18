@@ -29,7 +29,6 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
-            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
@@ -73,7 +72,7 @@
                                                 <div class="form-group">
                                                     <label>Seu nome como no cartão (*):</label>
                                                     <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase; cursor: not-allowed;">
-                                                </div>
+                                                </div>                                                
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 col-md-12">
                                                         <label>Número do cartão (*):</label>
@@ -102,6 +101,10 @@
                                                             <option>2031</option><option>2032</option><option>2033</option><option>2034</option>
                                                         </select>
                                                     </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Seu CPF:</label>
+                                                    <input id="cc-cpf" type="text" class="form-control cpf">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tem algum código promocional?</label>
@@ -165,8 +168,6 @@
         <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
-        
     </body>
 </html>
