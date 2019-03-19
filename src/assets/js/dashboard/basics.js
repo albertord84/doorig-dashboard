@@ -184,12 +184,12 @@ function modal_confirm_message(text_message,function_name,param){
     $('#modal_confirm_message').modal('show');
 }
 
-function timeConverter(UNIX_timestamp){
+function timeConverter(UNIX_timestamp,sep){
     var a = new Date(UNIX_timestamp * 1000);
     var year = a.getFullYear();
-    var month = a.getMonth();
+    var month = a.getMonth()+1;
     var date = a.getDate();
-    var time = year+'-'+month+'-'+date;
+    var time = year+sep+month+sep+date;
     return time;
 }
 
