@@ -29,6 +29,8 @@ $(document).ready(function(){
     });
     
     $(".visivility-access").click(function(){
+        if(module=="visibility")
+            return;
         var final_url = base_url.replace(module,"visibility");
         //var btn =this;
         $.ajax({
@@ -52,7 +54,9 @@ $(document).ready(function(){
         });
     });
     
-    $(".post-stories-access").click(function(){        
+    $(".post-stories-access").click(function(){
+        if(module=="post-stories")
+            return;
         modal_success_message("Módulo em desenvolvimento"); return false;
         var final_url = base_url.replace(module,"posting");
         $(location).attr('href', final_url+"index.php/welcome/index/");
@@ -67,31 +71,10 @@ $(document).ready(function(){
     });
     
     $(".payment-access").click(function(){
-        if(module=="dashboard"){
-            $(location).attr('href', base_url+"index.php/welcome/payment_view/");
-        }else{            
-            var final_url = base_url.replace(module,"dashboard");
-            //var btn =this;
-            $.ajax({ 
-                url : base_url+'index.php/welcome/call_to_generate_access_token',
-                data :{
-                    "module_id":0 // go to dashboard
-                },
-                type : 'POST',
-                dataType : 'json',
-                success : function(response){
-                    //spinner_stop(btn);
-                    if(response.code===0){
-                        $(location).attr('href', final_url+"index.php/welcome/payment_view/"+response.LoginToken+"/"+response.ClientId);
-                    } else
-                        modal_alert_message(response.message);                    
-                },
-                error : function(xhr, status) {
-                    //spinner_stop(btn);
-                    modal_alert_message('Erro enviando a mensagem, tente depois...');                    
-                }
-            });
-        }        
+        var final_url = base_url;
+        if(module!="dashboard")
+            final_url = base_url.replace(module,"dashboard");
+        $(location).attr('href', final_url+"index.php/welcome/payment_view/");  
     });
     
     $(".sumarize-account-access").click(function(){        
@@ -99,30 +82,9 @@ $(document).ready(function(){
     });
             
     $(".message-access").click(function(){
-        if(module=="dashboard"){
-            $(location).attr('href', base_url+"index.php/welcome/message_view/");
-        }else{       
-            var final_url = base_url.replace(module,"dashboard");
-            //var btn =this;
-            $.ajax({ 
-                url : base_url+'index.php/welcome/call_to_generate_access_token',
-                data :{
-                    "module_id":0 // go to dashboard
-                },
-                type : 'POST',
-                dataType : 'json',
-                success : function(response){
-                    //spinner_stop(btn);
-                    if(response.code===0){
-                        $(location).attr('href', final_url+"index.php/welcome/message_view/"+response.LoginToken+"/"+response.ClientId);
-                    } else
-                        modal_alert_message(response.message);                    
-                },
-                error : function(xhr, status) {
-                    //spinner_stop(btn);
-                    modal_alert_message('Erro enviando a mensagem, tente depois...');                    
-                }
-            });             
-        }
+        var final_url = base_url;
+        if(module!="dashboard")
+            final_url = base_url.replace(module,"dashboard");
+        $(location).attr('href', final_url+"index.php/welcome/message_view/");
     });
 });
