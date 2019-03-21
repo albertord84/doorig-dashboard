@@ -107,7 +107,7 @@ namespace business {
                 if ($this->Id) {
                     $url = $GLOBALS['sistem_config']->BASE_SITE_URL . 'welcome/get_doorig_info';
 
-                    $GuzClient = new \GuzzleHttp\Client();
+                    $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
                     $response = $GuzClient->post($url, [
                         \GuzzleHttp\RequestOptions::FORM_PARAMS => ['client_id' => $this->Id]
                     ]);

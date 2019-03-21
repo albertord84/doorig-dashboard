@@ -36,7 +36,7 @@ class Welcome extends CI_Controller {
             if ($login_token) {
                 $this->session->set_userdata('client', NULL);
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
-                $GuzClient = new \GuzzleHttp\Client();
+                $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
                 $response = $GuzClient->post($url, [
                     GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
                 ]);
@@ -122,7 +122,7 @@ class Welcome extends CI_Controller {
     public function internal_index($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
-            $GuzClient = new \GuzzleHttp\Client();
+            $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
             ]);
@@ -194,7 +194,7 @@ class Welcome extends CI_Controller {
 //            $client_id = 1;
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
             $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "welcome/generate_access_token";
-            $GuzClient = new \GuzzleHttp\Client();
+            $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::FORM_PARAMS => [
                     'client_id' => $client_id,
@@ -283,7 +283,7 @@ class Welcome extends CI_Controller {
     }
 
     public function request_lateral_menu($client_id) {
-        $GuzClient = new \GuzzleHttp\Client();
+        $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
         $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_lateral_menu";
         $response = $GuzClient->post($url, [
             GuzzleHttp\RequestOptions::FORM_PARAMS => [
@@ -297,7 +297,7 @@ class Welcome extends CI_Controller {
     }
 
     public function request_modals() {
-        $GuzClient = new \GuzzleHttp\Client();
+        $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
         $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_modals";
         $response = $GuzClient->get($url);
         $StatusCode = $response->getStatusCode();
