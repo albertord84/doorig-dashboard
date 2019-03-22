@@ -20,8 +20,8 @@
         <!--Toaster Popup message CSS -->
         <link href="<?php echo base_url()?>assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">        
         <!-- Custom CSS -->
-        <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url()?>assets/css/style-doorig.css" rel="stylesheet">        
+        <link href="<?php echo base_url()?>assets/css/style.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">
+        <link href="<?php echo base_url()?>assets/css/style-doorig.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">        
         <!-- Dashboard 1 Page CSS -->
         <link href="<?php echo base_url()?>assets/css/pages/dashboard1.css" rel="stylesheet">        
         <!-- You can change the theme colors from here -->
@@ -124,11 +124,11 @@
         
         <!-- system scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         
     </body>
 </html>
