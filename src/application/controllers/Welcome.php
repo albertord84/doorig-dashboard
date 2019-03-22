@@ -156,7 +156,7 @@ class Welcome extends CI_Controller {
         $client = new GuzzleHttp\Client(['verify' => false ]);
 
         #This url define speific Target for guzzle
-        $url = "http://" . $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
+        $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
 
         #guzzle
         try {
