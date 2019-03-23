@@ -26,8 +26,9 @@ class Welcome extends CI_Controller {
 
     //PRIMARY FUNCTIONS----------------------------------------------------------
     public function aaa() {
-        $Client = unserialize($this->session->userdata('client'));
-        var_dump($Client);
+//        $Client = unserialize($this->session->userdata('client'));
+//        var_dump($Client);
+        var_dump($GLOBALS['sistem_config']);
     }
 
     public function index($login_token = NULL) {
@@ -63,7 +64,7 @@ class Welcome extends CI_Controller {
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
-                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
+                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;                
                 $this->load->view('dashboard_view', $param);
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
