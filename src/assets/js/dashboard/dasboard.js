@@ -57,9 +57,9 @@ $(document).ready(function(){
     $(".post-stories-access").click(function(){
         if(module=="post-stories")
             return;
-        modal_success_message("Módulo em desenvolvimento"); return false;
-        var final_url = base_url.replace(module,"posting");
-        $(location).attr('href', final_url+"index.php/welcome/index/");
+//        modal_success_message("Módulo em desenvolvimento"); return false;
+//        var final_url = base_url.replace(module,"posting");
+//        $(location).attr('href', final_url+"index.php/welcome/index/");
     });
     
     $(".directs-access").click(function(){        

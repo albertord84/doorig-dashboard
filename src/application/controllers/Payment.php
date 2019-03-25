@@ -34,6 +34,7 @@ class Payment extends CI_Controller {
         $datas['cc-month'];
         $datas['cc-year'];
         $datas['cc-cpf'];
+        $datas['promotional-code'];
         
         return Response::ResponseOK()->toJson();
     }

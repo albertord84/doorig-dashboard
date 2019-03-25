@@ -76,6 +76,7 @@ $(document).ready(function(){
                     'cc-month': $('#cc-month').val(),
                     'cc-year': $('#cc-year').val(),
                     'cc-cpf': $('#cc-cpf').val(),
+                    'promotional-code': $('#promotional-code').val(),
                 };
                 datas['promotional_code']=$('#promotional-code').val();
                 $.ajax({

@@ -26,8 +26,9 @@ class Welcome extends CI_Controller {
 
     //PRIMARY FUNCTIONS----------------------------------------------------------
     public function aaa() {
-        $Client = unserialize($this->session->userdata('client'));
-        var_dump($Client);
+//        $Client = unserialize($this->session->userdata('client'));
+//        var_dump($Client);
+        var_dump($GLOBALS['sistem_config']);
     }
 
     public function index($login_token = NULL) {
@@ -63,6 +64,7 @@ class Welcome extends CI_Controller {
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
+                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;                
                 $this->load->view('dashboard_view', $param);
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
@@ -85,6 +87,7 @@ class Welcome extends CI_Controller {
         $param["client_datas"] = json_encode($Client);
         $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
         $param["modals"] = $this->request_modals();
+        $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
         $this->load->view('message_view', $param);
     }
     
@@ -108,13 +111,15 @@ class Welcome extends CI_Controller {
         $param["client_datas"] = json_encode($Client);
         $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
         $param["modals"] = $this->request_modals();
+        $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
         $this->load->view('payment_view', $param);
     }
 
     public function sumarize_view() {
         $param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
-        $param["lateral_menu"] = $this->load->view('payment_view', '', true);
+        $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
+        $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
         $this->load->view('message_view', $param);
     }
 
@@ -140,6 +145,7 @@ class Welcome extends CI_Controller {
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
+                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
                 $this->load->view('dashboard_view', $param);
             } else {
                 var_dump($content);
@@ -153,10 +159,10 @@ class Welcome extends CI_Controller {
 
     public function confirm_login($login_token) {
         # guzzle client define
-        $client = new GuzzleHttp\Client();
+        $client = new GuzzleHttp\Client(['verify' => false ]);
 
         #This url define speific Target for guzzle
-        $url = "http://" . $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
+        $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
 
         #guzzle
         try {
@@ -172,7 +178,9 @@ class Welcome extends CI_Controller {
             $data = json_decode($json);
             var_dump($data);
             if ($data->code == 0) {
-                $param["lateral_menu"] = $this->load->view('lateral_menu');
+                $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
+                $param["modals"] = $this->load->view('modals', '', true);
+                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
                 $this->load->view('dashboard_view', $param);
             }
         } catch (GuzzleHttp\Exception\BadResponseException $e) {
