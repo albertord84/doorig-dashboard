@@ -93,7 +93,7 @@ namespace business {
 
         public function setActive(bool $active = TRUE) {
             $CI = &get_instance();
-            $client_module_id = $CI->Clients_modules_model->update($this->Id, $client_id = NULL, $module_id = NULL, $active, $init_date = time(), $end_date = NULL, $login_token = NULL);
+            $client_module_id = $CI->Clients_modules_model->update($this->Id, $client_id = NULL, $module_id = NULL, $active, $init_date = time());
             $this->load_data($client_module_id);
             return $client_module_id;
         }

@@ -58,7 +58,7 @@ class Clients_modules_model extends CI_Model {
         $this->db->delete('clients_modules', array('id' => $id));
     }
 
-    function update($id, $client_id, $module_id, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
+    function update($id, $client_id = NULL, $module_id = NULL, $active = NULL, $init_date = NULL, $end_date = NULL, $login_token = NULL) {
 
         if ($client_id)
             $this->client_id = $client_id;
