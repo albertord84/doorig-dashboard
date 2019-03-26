@@ -23,10 +23,11 @@ class Modules_model extends CI_Model {
         parent::construct();
     }
 
-    function save($name, $description) {
+    function save($name, $description = NULL, $url = NULL) {
 
         $this->name = $name;
         $this->description = $description;
+        $this->url = $url;
 
 
         $this->db->insert('modules', $this);
@@ -41,10 +42,11 @@ class Modules_model extends CI_Model {
         $this->db->delete('modules', array('id' => $id));
     }
 
-    function update($id, $name, $description) {
+    function update($id, $name, $description = NULL, $url = NULL) {
 
         $this->name = $name;
         $this->description = $description;
+        $this->url = $url;
 
 
         $this->db->update('modules', $this, array('id' => $id));

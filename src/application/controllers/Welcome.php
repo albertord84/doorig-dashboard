@@ -75,11 +75,19 @@ class Welcome extends CI_Controller {
         }
     }
 
-    public function log_out() {
-        //$this->load->model('class/user_model');
-        //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
-        $this->session->sess_destroy();
+    public function logout_all() {
+        
+        $Client = new Client(0);
+        $Client = unserialize($this->session->userdata('client'));
+        $Client->logout_all();
+        
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
+    }
+
+    public function log_out() {
+        //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
+        
+        $this->session->sess_destroy();
     }
 
     public function message_view() {

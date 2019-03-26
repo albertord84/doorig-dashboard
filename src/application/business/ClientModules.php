@@ -4,6 +4,7 @@ namespace business {
 
     require_once config_item('business-class');
     require_once config_item('business-client-class');
+    require_once config_item('business-loader-class');
     require_once config_item('business-module-class');
     require_once config_item('business-client-module-class');
     require_once config_item('business-error-codes-class');
@@ -16,7 +17,7 @@ namespace business {
      * @todo Define an Client business class.
      * 
      */
-    class ClientModules extends Business {
+    class ClientModules extends Loader {
 
         public $Modules;
         private $Client; // Client Reference
@@ -48,7 +49,7 @@ namespace business {
             $this->fill_data($data);
         }
 
-        private function fill_data(array $modules = NULL) {
+        protected function fill_data($modules = NULL) {
             if (count($modules)) {
                 foreach ($modules as $key => $client_module) {
                     $Module = new Module();

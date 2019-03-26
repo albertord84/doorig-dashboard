@@ -25,6 +25,7 @@ namespace business {
         public $Id;
         public $Name;
         public $Description;
+        public $Url;
 
         /**
          * 
@@ -57,6 +58,7 @@ namespace business {
             if ($data) {
                 $this->Name = $data->name;
                 $this->Description = $data->description;
+                $this->Url = $data->url;
             } else {
 //throw ErrorCodes::getException(ErrorCodes::CLIENT_DATA_NOT_FOUND);
             }

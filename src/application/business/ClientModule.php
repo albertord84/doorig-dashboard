@@ -30,7 +30,7 @@ namespace business {
          * @todo Class constructor.
          * 
          */
-        function __construct(Client &$client, Module &$module) {
+        function __construct(Client &$client = NULL, Module &$module = NULL) {
             parent::__construct();
 
             $CI = &get_instance();

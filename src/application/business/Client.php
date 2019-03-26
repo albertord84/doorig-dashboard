@@ -107,7 +107,7 @@ namespace business {
                 if ($this->Id) {
                     $url = $GLOBALS['sistem_config']->BASE_SITE_URL . 'welcome/get_doorig_info';
 
-                    $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+                    $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
                     $response = $GuzClient->post($url, [
                         \GuzzleHttp\RequestOptions::FORM_PARAMS => ['client_id' => $this->Id]
                     ]);
@@ -150,7 +150,7 @@ namespace business {
                 $ClientModule->save($client_id, Module::post_stories, FALSE);
                 $ClientModule->save($client_id, Module::statistic, FALSE);
                 $ClientModule->save($client_id, Module::leads, FALSE);
-                
+
                 return $client_id;
             }
             return FALSE;
@@ -192,6 +192,30 @@ namespace business {
             }
 
             return FALSE;
+        }
+
+        public function logout_all() {
+            $ci = &get_instance();
+
+            if (!$this->ClientModules->isLoaded()) {
+                $this->ClientModules->load_data();
+            }
+
+            $ClientModule = new ClientModule($client = NULL, $module = NULL);
+            foreach ($this->ClientModules->Modules as $key => $ClientModule) {
+
+                $this->logout_module($ClientModule);
+            }
+        }
+
+        public function logout_module(ClientModule $ClientModule) {
+            try {
+                $url = $ClientModule->Module->Url . 'welcome/log_out';
+                $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
+                $response = $GuzClient->post($url);
+            } catch (\Exception $exc) {
+                //echo $exc->getTraceAsString();
+            }
         }
 
     }
