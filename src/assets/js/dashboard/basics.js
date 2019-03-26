@@ -229,7 +229,7 @@ $(document).ready(function(){
     });
     
     $("#lnk_loguot").click(function () {
-        $(location).attr('href', base_url+'index.php/welcome/log_out')
+        $(location).attr('href', base_url+'index.php/welcome/logout_all')
         return false;
     });
     
