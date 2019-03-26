@@ -106,13 +106,17 @@
                                         <img class="client_photo"  src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user">
                                     </div>
                                     <div class="u-text">
+                                        <h5 class="text-dark"><?php echo $name;?></h5>
                                         <p class="text-muted"><?php echo $email;?></p>
-                                        <a id="lnk_loguot" href=""><i class="fa fa-power-off"></i> Logout</a>
                                     </div>
                                     <div>
                                     </div>
                                 </div>
                             </li>
+                            <div id="dinamic_menu_items">                                
+                            </div>
+                            <li role="separator" class="divider"></li>
+                            <li><a id="" href="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>welcome/logout_all"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                 </li>

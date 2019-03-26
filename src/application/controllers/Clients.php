@@ -23,8 +23,8 @@ class Clients extends CI_Controller {
         $client_id = $this->input->post()["client_id"];
         $Client = new Client($client_id);
         $Client->load_doorig_info();
-        $param['email'] = $Client->DoorigInfo->Email;
-
+        $param['email'] = $Client->DoorigInfo->Email;        
+        $param['name'] = $Client->DoorigInfo->Name;
         $lateral_menu = $this->load->view('lateral_menu', $param, TRUE);
         print_r($lateral_menu);
     }
