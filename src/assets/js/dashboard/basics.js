@@ -1,6 +1,6 @@
 var ig_profile_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
-var ig_geolocation_regular_expression = "^[a-zA-Z-0-9\._]{1,300}$";
-var ig_hashtag_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
+var ig_geolocation_regular_expression = "^[a-zA-Z-0-9\._áéíóúàèìòùâêîôûãõẽçÇ]{1,300}$";
+var ig_hashtag_regular_expression = "^[a-zA-Z0-9\._áéíóúàèìòùâêîôûãõẽçÇ]{1,300}$";
 var verification_code_regular_expression = "^[0-9]{4}$";
 var checkpoint_required_code_regular_expression = "^[0-9]{6}$";
 var email_regular_expression = "^[a-zA-Z0-9\._-]+@([a-zA-Z0-9-]{2,}[.])*[a-zA-Z]{2,}$";
@@ -189,7 +189,7 @@ function timeConverter(UNIX_timestamp,sep){
     var year = a.getFullYear();
     var month = a.getMonth()+1;
     var date = a.getDate();
-    var time = year+sep+month+sep+date;
+    var time = date+sep+month+sep+year;
     return time;
 }
 
