@@ -31,6 +31,8 @@ $(document).ready(function(){
     $(".visivility-access").click(function(){
         if(module=="visibility")
             return;
+        if(module=="visibility_updates")
+            $(location).attr('href', base_url+"index.php/welcome/index/");
         var final_url = base_url.replace(module,"visibility");
         //var btn =this;
         $.ajax({
