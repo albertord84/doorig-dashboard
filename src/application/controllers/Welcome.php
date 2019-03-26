@@ -29,6 +29,7 @@ class Welcome extends CI_Controller {
 //        $Client = unserialize($this->session->userdata('client'));
 //        var_dump($Client);
         var_dump($GLOBALS['sistem_config']);
+        //$this->session->sess_destroy();
     }
 
     public function index($login_token = NULL) {
@@ -79,6 +80,9 @@ class Welcome extends CI_Controller {
         
         $Client = new Client(0);
         $Client = unserialize($this->session->userdata('client'));
+        if (!$Client->ClientModules) {
+            $Client->ClientModules = new \business\ClientModules($Client);
+        }
         $Client->logout_all();
         
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
