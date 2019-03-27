@@ -81,6 +81,7 @@ class Welcome extends CI_Controller {
         $Client = new Client(0);
         $Client = unserialize($this->session->userdata('client'));
         if (!($Client instanceof Client)) {
+            var_dump($Client);
             $Client->ClientModules = new \business\ClientModules($Client);
         }
         if ($Client)
