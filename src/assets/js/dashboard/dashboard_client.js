@@ -49,6 +49,7 @@ $(document).ready(function(){
     });    
     
     $("#payment_btn").click(function(){
+        var final_url = base_url.replace(module,"visibility");
         if (($('#cc-name').val()).toUpperCase()==='VISA' || ($('#cc-name').val()).toUpperCase()==='MASTERCARD') {
             modal_alert_message(T("Informe seu nome no cartão e não a bandeira dele."));
             return;
@@ -79,7 +80,7 @@ $(document).ready(function(){
                     'promotional-code': $('#promotional-code').val(),
                 };
                 $.ajax({
-                    url: base_url + 'index.php/Payment/payment/',
+                    url: final_url + 'index.php/Payment/add_payment/',
                     data: datas,
                     type: 'POST',
                     dataType: 'json',
