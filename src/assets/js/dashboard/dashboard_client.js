@@ -21,7 +21,7 @@ $(document).ready(function(){
                 type : 'POST',
                 dataType : 'json',
                 success : function(response){
-                    if(response['success']){                        
+                    if(response.code===0){                        
                         modal_success_message(response['message']);                        
                     } else
                         modal_alert_message(response['message']);    
@@ -78,14 +78,13 @@ $(document).ready(function(){
                     'cc-cpf': $('#cc-cpf').val(),
                     'promotional-code': $('#promotional-code').val(),
                 };
-                datas['promotional_code']=$('#promotional-code').val();
                 $.ajax({
                     url: base_url + 'index.php/Payment/payment/',
                     data: datas,
                     type: 'POST',
                     dataType: 'json',
                     success: function (response) {
-                        if (response['success']) {
+                        if (response.code===0) {
                             modal_success_message(response.message);                            
                         } else {
                             modal_alert_message(response.message);

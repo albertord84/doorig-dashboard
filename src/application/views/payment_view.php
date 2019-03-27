@@ -71,7 +71,7 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label>Seu nome como no cartão (*):</label>
-                                                    <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase; cursor: not-allowed;">
+                                                    <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase;">
                                                 </div>                                                
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 col-md-12">
@@ -124,11 +124,11 @@
                         </div>
                     </div>                        
                 </div>
-
-
             </div>
             <!-- End Container fluid  -->
-            <!-- footer -->
+            
+            <?php echo $modals?>
+            
             <footer class="footer text-center">
                 DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>
@@ -169,5 +169,6 @@
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
     </body>
 </html>

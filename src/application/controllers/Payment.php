@@ -25,18 +25,18 @@ class Payment extends CI_Controller {
     }
     
     public function payment() {
-        $Client_id = unserialize($this->session->userdata('client'))->Id;
-        $datas = $this->input->post();
-        
-        $datas['cc-number'];
-        $datas['cc-cvv'];
-        $datas['cc-name'];
-        $datas['cc-month'];
-        $datas['cc-year'];
-        $datas['cc-cpf'];
-        $datas['promotional-code'];
-        
-        return Response::ResponseOK()->toJson();
+//        $Client_id = unserialize($this->session->userdata('client'))->Id;
+//        $datas = $this->input->post();
+//        
+//        $datas['cc-number'];
+//        $datas['cc-cvv'];
+//        $datas['cc-name'];
+//        $datas['cc-month'];
+//        $datas['cc-year'];
+//        $datas['cc-cpf'];
+//        $datas['promotional-code'];
+//        
+//        return Response::ResponseOK()->toJson();
     }
 
     public function vindi_notification_post() {
