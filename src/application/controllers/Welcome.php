@@ -38,7 +38,7 @@ class Welcome extends CI_Controller {
             if ($login_token) {
                 $this->session->set_userdata('client', NULL);
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
-                $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+                $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
                 $response = $GuzClient->post($url, [
                     GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
                 ]);
@@ -65,7 +65,7 @@ class Welcome extends CI_Controller {
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
-                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;                
+                $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
                 $this->load->view('dashboard_view', $param);
             } else {
                 header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
@@ -77,20 +77,23 @@ class Welcome extends CI_Controller {
     }
 
     public function logout_all() {
-        
+
         $Client = new Client(0);
         $Client = unserialize($this->session->userdata('client'));
-        if (!$Client->ClientModules) {
+        if (!($Client instanceof Client)) {
             $Client->ClientModules = new \business\ClientModules($Client);
         }
-        $Client->logout_all();
-        
+        if ($Client)
+            $Client->logout_all();
+
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
     public function log_out() {
         //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
-        
+        session_start();
+        $this->session->set_userdata('client_module', NULL);
+        $this->session->set_userdata('client', NULL);
         $this->session->sess_destroy();
     }
 
@@ -102,10 +105,10 @@ class Welcome extends CI_Controller {
         $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
         $this->load->view('message_view', $param);
     }
-    
+
     public function contact_us() {
         //@TODO: hacer esto funcionar
-        $datas = $this->input->post(); 
+        $datas = $this->input->post();
         $datas['contact_subject'];
         $datas['contact_message'];
         $Client = unserialize($this->session->userdata('client'));
@@ -139,7 +142,7 @@ class Welcome extends CI_Controller {
     public function internal_index($login_token) {
         try {
             $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
-            $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+            $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::FORM_PARAMS => ['login_token' => $login_token]
             ]);
@@ -171,7 +174,7 @@ class Welcome extends CI_Controller {
 
     public function confirm_login($login_token) {
         # guzzle client define
-        $client = new GuzzleHttp\Client(['verify' => false ]);
+        $client = new GuzzleHttp\Client(['verify' => false]);
 
         #This url define speific Target for guzzle
         $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "/index.php/signin/dashboard_confirm_login_token";
@@ -214,7 +217,7 @@ class Welcome extends CI_Controller {
 //            $client_id = 1;
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
             $url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL . "welcome/generate_access_token";
-            $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+            $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
             $response = $GuzClient->post($url, [
                 GuzzleHttp\RequestOptions::FORM_PARAMS => [
                     'client_id' => $client_id,
@@ -303,7 +306,7 @@ class Welcome extends CI_Controller {
     }
 
     public function request_lateral_menu($client_id) {
-        $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+        $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
         $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_lateral_menu";
         $response = $GuzClient->post($url, [
             GuzzleHttp\RequestOptions::FORM_PARAMS => [
@@ -317,7 +320,7 @@ class Welcome extends CI_Controller {
     }
 
     public function request_modals() {
-        $GuzClient = new \GuzzleHttp\Client(['verify' => false ]);
+        $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
         $url = $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL . "Clients/get_modals";
         $response = $GuzClient->get($url);
         $StatusCode = $response->getStatusCode();

@@ -211,8 +211,13 @@ namespace business {
         public function logout_module(ClientModule $ClientModule) {
             try {
                 $url = $ClientModule->Module->Url . 'welcome/log_out';
-                $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
-                $response = $GuzClient->post($url);
+                header('Location: ' . $url);
+                //$GuzClient = new \GuzzleHttp\Client(['verify' => false]);
+                //$response = $GuzClient->get($url);
+                //$response = file_get_contents($url);
+
+                //var_dump($response->getBody()->getContents());
+                //var_dump($response);
             } catch (\Exception $exc) {
                 //echo $exc->getTraceAsString();
             }
