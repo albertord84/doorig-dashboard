@@ -205,6 +205,7 @@ namespace business {
             foreach ($this->ClientModules->Modules as $key => $ClientModule) {
 
                 $this->logout_module($ClientModule);
+                sleep(2);
             }
         }
 
