@@ -201,7 +201,7 @@ namespace business {
                 $this->ClientModules->load_data();
             }
 
-            $ClientModule = new ClientModule($client = NULL, $module = NULL);
+            $ClientModule = new ClientModule();
             foreach ($this->ClientModules->Modules as $key => $ClientModule) {
 
                 $this->logout_module($ClientModule);
