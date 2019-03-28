@@ -36,6 +36,7 @@ class Welcome extends CI_Controller {
         try {
             $Client = NULL;
             if ($login_token) {
+                //$this->session->sess_regenerate(TRUE);
                 $this->session->set_userdata('client', NULL);
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
                 $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
@@ -91,10 +92,11 @@ class Welcome extends CI_Controller {
 
     public function log_out() {
         //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
-        session_start();
         $this->session->set_userdata('client_module', NULL);
         $this->session->set_userdata('client', NULL);
         $this->session->sess_destroy();
+        
+        header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
     public function message_view() {
