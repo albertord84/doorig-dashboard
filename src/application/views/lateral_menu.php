@@ -15,13 +15,13 @@
                     <!-- Dark Logo icon  kkkk-->
                     <img width="27px" src="<?php echo base_url()?>assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                     <!-- Light Logo icon -->
-                    <img src="<?php echo base_url()?>assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                    <!--<img src="<?php echo base_url()?>assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />-->
                 </b>
                 <span>
                     <!-- dark Logo text -->
                     <img width="110px" src="<?php echo base_url()?>assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                     <!-- Light Logo text -->    
-                    <img src="<?php echo base_url()?>assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                    <!--<img src="<?php echo base_url()?>assets/images/logo-light-text.png" class="light-logo" alt="homepage" />-->
                 </span> 
             </a>
         </div>
@@ -35,7 +35,7 @@
             <!-- User profile -->
             <ul class="navbar-nav my-lg-0" >
                 <!-- Comment -->
-                <li class="nav-item dropdown">
+<!--                <li class="nav-item dropdown">
                     <a style="padding-top:15px; margin-top:0px; height:50px" class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="icon-Bell"></i>
                         <div class="notify" > 
                             <span class="heartbit" style="margin-top: 12px"></span> 
@@ -76,9 +76,9 @@
                             </li>
                         </ul>
                     </div>
-                </li>                            
+                </li>                            -->
                 <!-- Language -->
-                <li class="nav-item dropdown">
+<!--                <li class="nav-item dropdown">
                     <a style="padding-top:15px; margin-top:0px; height:50px" class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                         <i class="flag-icon flag-icon-us"></i>
                     </a>
@@ -87,7 +87,7 @@
                         <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a>
                         <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Español</a>
                     </div>
-                </li>                            
+                </li>                            -->
                 <!-- Profile -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -106,13 +106,17 @@
                                         <img class="client_photo"  src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user">
                                     </div>
                                     <div class="u-text">
+                                        <h5 class="text-dark"><?php echo $name;?></h5>
                                         <p class="text-muted"><?php echo $email;?></p>
-                                        <a id="lnk_loguot" href=""><i class="fa fa-power-off"></i> Logout</a>
                                     </div>
                                     <div>
                                     </div>
                                 </div>
                             </li>
+                            <div id="dinamic_menu_items">                                
+                            </div>
+                            <li role="separator" class="divider"></li>
+                            <li><a id="" href="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>welcome/logout_all"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                 </li>

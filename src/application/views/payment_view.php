@@ -20,8 +20,8 @@
         <!--Toaster Popup message CSS -->
         <link href="<?php echo base_url()?>assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">        
         <!-- Custom CSS -->
-        <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url()?>assets/css/style-doorig.css" rel="stylesheet">        
+        <link href="<?php echo base_url()?>assets/css/style.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">
+        <link href="<?php echo base_url()?>assets/css/style-doorig.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">        
         <!-- Dashboard 1 Page CSS -->
         <link href="<?php echo base_url()?>assets/css/pages/dashboard1.css" rel="stylesheet">        
         <!-- You can change the theme colors from here -->
@@ -29,7 +29,6 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
-            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
@@ -72,8 +71,8 @@
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label>Seu nome como no cartão (*):</label>
-                                                    <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase; cursor: not-allowed;">
-                                                </div>
+                                                    <input id="cc-name" type="text" autofocus="" class="form-control" onkeyup="javascript:this.value=this.value.toUpperCase();" style="text-transform: uppercase;">
+                                                </div>                                                
                                                 <div class="row">
                                                     <div class="form-group col-lg-8 col-md-12">
                                                         <label>Número do cartão (*):</label>
@@ -104,6 +103,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Seu CPF:</label>
+                                                    <input id="cc-cpf" type="text" class="form-control cpf">
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Tem algum código promocional?</label>
                                                     <input id="promotional-code" type="text" autofocus="" class="form-control" placeholder="">
                                                 </div>
@@ -121,11 +124,11 @@
                         </div>
                     </div>                        
                 </div>
-
-
             </div>
             <!-- End Container fluid  -->
-            <!-- footer -->
+            
+            <?php echo $modals?>
+            
             <footer class="footer text-center">
                 DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>
@@ -162,11 +165,10 @@
         
         <!-- system scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
-        
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
     </body>
 </html>

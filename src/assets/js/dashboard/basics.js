@@ -1,6 +1,6 @@
 var ig_profile_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
-var ig_geolocation_regular_expression = "^[a-zA-Z-0-9\._]{1,300}$";
-var ig_hashtag_regular_expression = "^[a-zA-Z0-9\._]{1,300}$";
+var ig_geolocation_regular_expression = "^[a-zA-Z-0-9\._áéíóúàèìòùâêîôûãõẽçÇ]{1,300}$";
+var ig_hashtag_regular_expression = "^[a-zA-Z0-9\._áéíóúàèìòùâêîôûãõẽçÇ]{1,300}$";
 var verification_code_regular_expression = "^[0-9]{4}$";
 var checkpoint_required_code_regular_expression = "^[0-9]{6}$";
 var email_regular_expression = "^[a-zA-Z0-9\._-]+@([a-zA-Z0-9-]{2,}[.])*[a-zA-Z]{2,}$";
@@ -35,7 +35,6 @@ var ticket_bank_option_tmp_regular_expression = '^[1-3]{1}$';
     };
 }(jQuery));
 
-
 function validate_element(element_selector,pattern){
     if(!$(element_selector).val().match(pattern)){
         $(element_selector).css("border", "1px solid red");
@@ -68,8 +67,8 @@ function validate_equals(element_selector, element_selector2){
 
 function validate_cpf(element_selector, pattern) {
     var cpf=$(element_selector).val();
+    cpf = cpf.replace(/[^\d]+/g,'');    
     if(cpf.match(pattern)){
-        cpf = cpf.replace(/[^\d]+/g,'');    
         if(cpf == '') {
             $(element_selector).css("border", "1px solid red");
             return false;
@@ -185,12 +184,12 @@ function modal_confirm_message(text_message,function_name,param){
     $('#modal_confirm_message').modal('show');
 }
 
-function timeConverter(UNIX_timestamp){
+function timeConverter(UNIX_timestamp,sep){
     var a = new Date(UNIX_timestamp * 1000);
     var year = a.getFullYear();
-    var month = a.getMonth();
+    var month = a.getMonth()+1;
     var date = a.getDate();
-    var time = year+'-'+month+'-'+date;
+    var time = date+sep+month+sep+year;
     return time;
 }
 
@@ -230,7 +229,7 @@ $(document).ready(function(){
     });
     
     $("#lnk_loguot").click(function () {
-        $(location).attr('href', base_url+'index.php/welcome/log_out')
+        $(location).attr('href', base_url+'index.php/welcome/logout_all')
         return false;
     });
     

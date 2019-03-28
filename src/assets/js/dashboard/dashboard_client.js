@@ -13,7 +13,7 @@ $(document).ready(function(){
           if(contact_subject && message){
             //var l = Ladda.create(this);  l.start(); l.start();
             $.ajax({
-                url : base_url+'index.php/welcome/message',
+                url : base_url+'index.php/welcome/contact_us',
                 data :{ 
                         'subject':$("#contact_subject").val(),
                         'message':$("#contact_message").val()
@@ -21,7 +21,7 @@ $(document).ready(function(){
                 type : 'POST',
                 dataType : 'json',
                 success : function(response){
-                    if(response['success']){                        
+                    if(response.code===0){                        
                         modal_success_message(response['message']);                        
                     } else
                         modal_alert_message(response['message']);    
@@ -49,6 +49,7 @@ $(document).ready(function(){
     });    
     
     $("#payment_btn").click(function(){
+        var final_url = base_url.replace(module,"visibility");
         if (($('#cc-name').val()).toUpperCase()==='VISA' || ($('#cc-name').val()).toUpperCase()==='MASTERCARD') {
             modal_alert_message(T("Informe seu nome no cartão e não a bandeira dele."));
             return;
@@ -75,15 +76,16 @@ $(document).ready(function(){
                     'cc-name': $('#cc-name').val(),
                     'cc-month': $('#cc-month').val(),
                     'cc-year': $('#cc-year').val(),
+                    'cc-cpf': $('#cc-cpf').val(),
+                    'promotional-code': $('#promotional-code').val(),
                 };
-                datas['promotional_code']=$('#promotional-code').val();
                 $.ajax({
-                    url: base_url + 'index.php/welcome/payment/',
+                    url: final_url + 'index.php/Payment/add_payment/',
                     data: datas,
                     type: 'POST',
                     dataType: 'json',
                     success: function (response) {
-                        if (response['success']) {
+                        if (response.code===0) {
                             modal_success_message(response.message);                            
                         } else {
                             modal_alert_message(response.message);

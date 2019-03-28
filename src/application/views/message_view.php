@@ -20,8 +20,8 @@
         <!--Toaster Popup message CSS -->
         <link href="<?php echo base_url()?>assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">        
         <!-- Custom CSS -->
-        <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
-        <link href="<?php echo base_url()?>assets/css/style-doorig.css" rel="stylesheet">        
+        <link href="<?php echo base_url()?>assets/css/style.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">
+        <link href="<?php echo base_url()?>assets/css/style-doorig.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">        
         <!-- Dashboard 1 Page CSS -->
         <link href="<?php echo base_url()?>assets/css/pages/dashboard1.css" rel="stylesheet">        
         <!-- You can change the theme colors from here -->
@@ -29,7 +29,6 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
-            var client_datas = <?php echo $client_datas;?>;
             var module = "dashboard";
         </script>
     </head>
@@ -43,13 +42,12 @@
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <div class="container-fluid">
-                <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Mensagem</li>
-                        </ol>
-                    </div>                        
+                
+                <!-- HEADER -->
+                <div class="card">
+                    <div class="card-body">
+                        <h1>CONTATO</h1>
+                    </div>
                 </div>
                 <!-- End Bread crumb and right sidebar toggle -->
                 <div class="row">
@@ -92,7 +90,7 @@
             
             <?php echo $modals?>
             
-            <footer class="footer">
+            <footer class="footer text-center">
                 DOORIG - TODOS OS DIREITOS RESERVADOS
             </footer>            
         </div>
@@ -126,11 +124,11 @@
         
         <!-- system scripts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/talkme_painel_dashboard.js"></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/PT/internalization.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         
     </body>
 </html>
