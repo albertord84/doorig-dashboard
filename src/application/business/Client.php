@@ -205,12 +205,12 @@ namespace business {
             foreach ($this->ClientModules->Modules as $key => $ClientModule) {
 
                 $this->logout_module($ClientModule);
-                sleep(5);
             }
         }
 
         public function logout_module(ClientModule $ClientModule) {
             try {
+                var_dump($url);
                 $url = $ClientModule->Module->Url . 'welcome/log_out';
                 header('Location: ' . $url);
                 //$GuzClient = new \GuzzleHttp\Client(['verify' => false]);

@@ -91,7 +91,7 @@
                 <!-- Profile -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="client_photo" src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user"  /> 
+                        <img class="client_photo" src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.jpeg" alt="user"  /> 
                         <span class="hidden-md-down">
                             <i ><?php echo $email;?></i>
                             &nbsp;
@@ -103,7 +103,7 @@
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img">
-                                        <img class="client_photo"  src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.png" alt="user">
+                                        <img class="client_photo"  src="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>../assets/profile_images/default-user.jpeg" alt="user">
                                     </div>
                                     <div class="u-text">
                                         <h5 class="text-dark"><?php echo $name;?></h5>
@@ -116,7 +116,7 @@
                             <div id="dinamic_menu_items">                                
                             </div>
                             <li role="separator" class="divider"></li>
-                            <li><a id="" href="<?php echo $GLOBALS["sistem_config"]->DASHBOARD_SITE_URL?>welcome/logout_all"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a id="lnk_loguot" href=""><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                 </li>
