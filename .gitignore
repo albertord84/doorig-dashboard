@@ -1,2 +1,7 @@
-/nbproject/private/
-/src (cópia)/nbproject/private/
+/nbproject/
+/.idea/*
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
