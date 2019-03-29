@@ -71,13 +71,15 @@ $(document).ready(function(){
         if (name && number && cvv && month && year) {
             if (date) {
                 datas={
-                    'cc-number': $('#cc-number').val(),
-                    'cc-cvv': $('#cc-cvv').val(),
-                    'cc-name': $('#cc-name').val(),
-                    'cc-month': $('#cc-month').val(),
-                    'cc-year': $('#cc-year').val(),
-                    'cc-cpf': $('#cc-cpf').val(),
-                    'promotional-code': $('#promotional-code').val(),
+                    'credit_card_number': $('#cc-number').val(),
+                    'credit_card_cvc': $('#cc-cvv').val(),
+                    'credit_card_name': $('#cc-name').val(),
+                    'credit_card_exp_month': $('#cc-month').val(),
+                    'credit_card_exp_year': $('#cc-year').val(),
+                    'cpf': $('#cc-cpf').val(),
+                    'promotional-code': $('#promotional-code').val(),                    
+                    'client_id':client_id,
+                    'user_email':email
                 };
                 $.ajax({
                     url: final_url + 'index.php/Payment/add_payment/',

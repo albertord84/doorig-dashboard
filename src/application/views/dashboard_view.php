@@ -28,7 +28,7 @@
         <link href="<?php echo base_url()?>assets/css/colors/default.css" id="theme" rel="stylesheet">        
         
         <script type="text/javascript">
-            var base_url = "<?php echo base_url()?>";
+            var base_url = "<?php echo base_url();?>";            
             var module = "dashboard";
         </script>
     </head>

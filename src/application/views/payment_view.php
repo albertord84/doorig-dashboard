@@ -30,6 +30,8 @@
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
             var module = "dashboard";
+            var client_id = "<?php echo $client_id;?>";
+            var email = "<?php echo $email;?>";
         </script>
     </head>
 
