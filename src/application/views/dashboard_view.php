@@ -29,6 +29,7 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url();?>";            
+            //var client = "<?php echo $client;?>";            
             var module = "dashboard";
         </script>
     </head>
@@ -47,11 +48,6 @@
                 <!-- welcome  -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <!--<h3 class="text-themecolor">Bem-vindo ao seu Dashboard!</h3>-->
-<!--                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>-->
                     </div>                        
                 </div>
 
@@ -63,142 +59,87 @@
                     </div>
                 </div>
                 <!-- modules  -->
-                <div class="row">
+                <div class="row">                    
                     
-                    
-                    <div class="col-lg-6 col-md-12" >
+                    <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["visibility"])) echo 'background-color:green;'?>">
+                            <div class="card-body text-center">                                
                                 <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Mais Visibilidade</h5>
+                                    <div class="col-lg-10 col-md-12 text-left">
+                                        <h5 class="card-title m-b-0">Mais Visibilidade</h5>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 text-right">
+                                        <a id="see_more_visibility" class="see_more"><i class="far fa-question-circle"></i></a>
+                                    </div>
                                 </div>
-                                <div id="module-vissivility">
-                                    <p class="text-justify">
-                                        Atraia "novos seguidores reais" para a sua marca no Instagram, aumentando suas chances de atrair mais fãs ou clientes ao seu negócio. 
-                                        Segmente seu público alvo através de Perfis de Referência, Geolocalização e Hastags.                                            
-                                        Aplique filtros para escolher a qualidade dos novos seguidores. 
-                                        Configure comentários ou dé Likes nas últimas postagens do seu público alvo para aumentar sua taxa de conversão.
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        O perfil da sua marca vai seguir outros perfis, aplicando as configurações selecionadas por você, e automáticamente os deixa de seguir após 48 horas. Acompanhamos suas estatísticas.
-                                    </p>                                                                              
-                                </div>
-                                <div class="text-center">
-                                    <!--<a href="#">Ver mais</a>-->                                    
-                                    <a class="has-arrow waves-effect waves-dark visivility-access" aria-expanded="false">
-                                        <button type="button" class="btn btn-info">
-                                            Acessar
-                                        </button>                                        
-                                    </a>
-                                </div>
+                                <a class="has-arrow waves-effect waves-dark visivility-access" aria-expanded="false">
+                                    <i id="icon_module_visivility" style="font-size:140px; color:#20aee3" class="icon-Globe"></i>                                
+                                    <br>
+                                    <span id="text_module_visivility" style="color:black">Acessar</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                     
-                    <!--<div class="col-lg-6 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Captação de Leads</h5>
-                                </div>
-                                <div id="module-leads">
-                                    <p class="text-justify">
-                                        A captação de leads é o processo de atrair seu público alvo fazendo que despertam seu interesse pela sua marca, produtos ou serviços.
-                                        Milhares de leads estão disponíveis publicamente no Instagram e podem ser suas agora.
-                                        Extraia suas leads para Email-Marketing e SMS-Marketing segmentando através de Perfis de Referência, Geolocalização e Hastags, e aplique filtros para escolher a qualidade. 
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        A ferramenta vai minerar as leads através de perfis, aplicando as configurações selecionadas por você, e lhe permitira esportar-as a um arquivo formatado.
-                                    </p>                                                                              
-                                </div>                                    
-                                <div class="text-center">
-                                    <a href="#">Ver mais</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["post_stories"])) echo 'background-color:green;'?>">
+                            <div class="card-body text-center">
                                 <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Post-Stories</h5>
+                                    <div class="col-lg-10 col-md-12 text-left">
+                                        <h5 class="card-title m-b-0">Post-Stories</h5>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 text-right">
+                                        <a id="see_more_posting" class="see_more"><i class="far fa-question-circle"></i></a>
+                                    </div>
                                 </div>
-                                <div id="module-vissivility">
-                                    <p class="text-justify">
-                                        Essas são duas das principais funcionalidades que o Instagram permite aos seus usuários.
-                                        Para economizar seu tempo, programe quando suas postagens devem ser realizadas na data e hora do seu interesse.
-                                        Agende a publicação de Stories no perfil da sua marca.
-                                        Selecione o post desejado e agende uma nova data para repostar! 
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        A ferramenta vai fazer estas tarefas automática e periódicamente na hora e data selecionada para cada evento.
-                                    </p>                                                                              
-                                </div>                                    
-                                <div class="text-center">
-                                    <!--<a href="#">Ver mais</a>-->                                    
-                                    <a class="has-arrow waves-effect waves-dark post-stories-access" aria-expanded="false">
-                                        <button type="button" class="btn btn-info">
-                                            Acessar
-                                        </button>                                        
-                                    </a>
-                                </div>
+                                <a class="has-arrow waves-effect waves-dark post-stories-access" aria-expanded="false">
+                                    <i id="icon_module_posting" style="font-size:140px" class="icon-Landscape-2"></i>
+                                    <br>
+                                    <span id="text_module_posting" style="color:black">Contratar</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">                    
+                <div class="row">        
+                    
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["directs"])) echo 'background-color:green;'?>">
+                            <div class="card-body text-center">
                                 <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Envio de Directs</h5>
+                                    <div class="col-lg-10 col-md-12 text-left">
+                                        <h5 class="card-title m-b-0">Envio de Directs</h5>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 text-right">
+                                        <a id="see_more_directs" class="see_more"><i class="far fa-question-circle"></i></a>
+                                    </div>
                                 </div>
-                                <div id="module-leads">
-                                    <p class="text-justify">
-                                        Instagram Direct, é a função que permite que sua marca se aproxime dos seguidores através de mensagens dirigidos, além de direcioná-los com links a suas páginas de conversão e atrair a atenção deles para o seu produto.
-                                        É um recurso que permite trocar mensagens e fotos de forma privada com os seguidores, e está disponível tanto para os perfis comerciais, quanto para os pessoais. 
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        Automatize o envio de Directs nesse módulo e anuncie seus produtos e serviços, envie códigos promocionais ou cupom de desconto.
-                                    </p>                                                                             
-                                </div>                                    
-                                <div class="text-center">
-                                    <!--<a href="#">Ver mais</a>-->                                    
-                                    <a class="has-arrow waves-effect waves-dark directs-access" aria-expanded="false">
-                                        <button type="button" class="btn btn-info">
-                                            Acessar
-                                        </button>                                        
-                                    </a>
-                                </div>
+                                <a class="has-arrow waves-effect waves-dark directs-access" aria-expanded="false">
+                                    <i id="icon_module_directs" style="font-size:140px" class="icon-Mail-Send"></i>
+                                    <br>
+                                    <span id="text_module_directs" style="color:black">Contratar</span>
+                                </a>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-lg-6 col-md-12">
                         <div class="card">
-                            <div class="card-body" style="<?php if(isset($client->ClientModules->Modules["analysis"])) echo 'background-color:green;'?>">
+                            <div class="card-body text-center">
                                 <div class="d-flex m-b-30 no-block">
-                                    <h5 class="card-title m-b-0 align-self-center">Deep-Analisys</h5>
+                                    <div class="col-lg-10 col-md-12 text-left">
+                                        <h5 class="card-title m-b-0">Deep-Analisys</h5>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 text-right">
+                                        <a id="see_more_deep_analisys" class="see_more"><i class="far fa-question-circle"></i></a>
+                                    </div>
                                 </div>
-                                <div id="module-vissivility">
-                                    <p class="text-justify">
-                                        Análise de seguidores, curtidas, comentários e postages.
-                                        Salve suas hashtags mais usadas em grupos! Você não precisa digitar sempre as mesmas hashtags. Crie grupos de hashtags para incluir em seus conteúdos e otimize tempo! 
-                                    </p>                                        
-                                    <p class="text-justify">
-                                        Em dependência da complexidade da tarefa escolhida para fazer a análisis, os resultados podem demorar um tempo.
-                                    </p>                                                                              
-                                </div>                                    
-                                <div class="text-center">
-                                    <!--<a href="#">Ver mais</a>-->                                    
-                                    <a class="has-arrow waves-effect waves-dark deep-analisys-access" aria-expanded="false">
-                                        <button type="button" class="btn btn-info">
-                                            Acessar
-                                        </button>                                        
-                                    </a>
-                                </div>
+                                <a class="has-arrow waves-effect waves-dark deep-analysis-access" aria-expanded="false">
+                                    <i id="icon_module_deep_analisys" style="font-size:140px" class="icon-Brain-2"></i>
+                                    <br>
+                                    <span id="text_module_deep_analisys" style="color:black">Contratar</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -245,5 +186,6 @@
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
     </body>
 </html>

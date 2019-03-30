@@ -193,6 +193,11 @@ function timeConverter(UNIX_timestamp,sep){
     return time;
 }
 
+function modal_text_information(text_message){
+    $('#modal_text_information').modal('show');
+    $('#text_information').text(text_message);
+}
+
 $("#verify_cep").click(function () {
     if(validate_element("#cep",'^[0-9]{8}$')){
         $.ajax({
