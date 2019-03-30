@@ -1,6 +1,15 @@
 $(document).ready(function(){    
     
-    //console.log(client);
+    
+    
+    function display_modules(){
+        var modules = client.ClientModules.Modules;
+        if(!modules.visibility) return;
+        if(modules.visibility.Active=="1"){
+            $("#icon_module_visivility").css({"color":"#20aee3"});
+            $("#text_module_visivility").text("Acessar");
+        }            
+    }
 
     $('#contact_form').keypress(function (e) {
         if (e.which == 13) {
@@ -126,6 +135,6 @@ $(document).ready(function(){
         return false;
     });
     
-    
+    display_modules();
     
  }); 

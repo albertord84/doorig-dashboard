@@ -29,7 +29,7 @@
         
         <script type="text/javascript">
             var base_url = "<?php echo base_url();?>";            
-            //var client = "<?php echo $client;?>";            
+            var client = <?php echo $client;?>;            
             var module = "dashboard";
         </script>
     </head>
@@ -73,9 +73,9 @@
                                     </div>
                                 </div>
                                 <a class="has-arrow waves-effect waves-dark visivility-access" aria-expanded="false">
-                                    <i id="icon_module_visivility" style="font-size:140px; color:#20aee3" class="icon-Globe"></i>                                
+                                    <i id="icon_module_visivility" style="font-size:140px;" class="icon-Globe"></i>                                
                                     <br>
-                                    <span id="text_module_visivility" style="color:black">Acessar</span>
+                                    <span id="text_module_visivility" style="color:black">Contratar</span>
                                 </a>
                             </div>
                         </div>

@@ -63,7 +63,8 @@ class Welcome extends CI_Controller {
                 $Client = unserialize($this->session->userdata('client'));
             }
             if ($Client) {
-                $param["client"] = $Client;
+                $a=json_encode(object_to_array($Client));
+                $param["client"] = json_encode(object_to_array($Client));
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
                 $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
