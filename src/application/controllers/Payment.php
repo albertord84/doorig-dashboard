@@ -26,7 +26,7 @@ class Payment extends CI_Controller {
 
     public function payment() {
         $Client = new Client();
-        $Client = unserialize($this->session->userdata('client'));
+        $Client = unserialize($this->session->userdata('client_dashboard'));
         $datas = $this->input->post();
 
         $datas['client_id'] = mycrypt($Client->Id); ///////////////

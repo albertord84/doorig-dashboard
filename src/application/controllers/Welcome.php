@@ -31,7 +31,7 @@ class Welcome extends CI_Controller {
             $Client = NULL;
             if ($login_token) {
                 //$this->session->sess_regenerate(TRUE);
-                $this->session->set_userdata('client', NULL);
+                $this->session->set_userdata('client_dashboard', NULL);
                 $url = $GLOBALS['sistem_config']->BASE_SITE_URL . "signin/dashboard_confirm_login_token";
                 $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
                 $response = $GuzClient->post($url, [
@@ -51,12 +51,12 @@ class Welcome extends CI_Controller {
                     // Load DOORIG INFO
                     @$Client->load_doorig_info();
 
-                    $this->session->set_userdata('client', serialize($Client));
+                    $this->session->set_userdata('client_dashboard', serialize($Client));
                     header("Location:" . $GLOBALS['sistem_config']->DASHBOARD_SITE_URL);
                     return;
                 }
-            } else if ($this->session->userdata('client')) {
-                $Client = unserialize($this->session->userdata('client'));
+            } else if ($this->session->userdata('client_dashboard')) {
+                $Client = unserialize($this->session->userdata('client_dashboard'));
             }
             if ($Client) {
                 $a = json_encode(object_to_array($Client));
@@ -77,7 +77,7 @@ class Welcome extends CI_Controller {
     public function logout_all() {
 
         $Client = new Client(0);
-        $Client = unserialize($this->session->userdata('client'));
+        $Client = unserialize($this->session->userdata('client_dashboard'));
         if ($Client instanceof Client && !$Client->ClientModules) {
             $Client->ClientModules = new \business\ClientModules($Client);
         }
@@ -89,15 +89,15 @@ class Welcome extends CI_Controller {
 
     public function log_out() {
         //$this->user_model->insert_washdog($this->session->userdata('id'), 'CLOSING SESSION');
-        $this->session->set_userdata('client_module', NULL);
-        $this->session->set_userdata('client', NULL);
+        $this->session->set_userdata('client_dashboard', NULL);
+        $this->session->set_userdata('client_dashboard', NULL);
         $this->session->sess_destroy();
 
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
     public function message_view() {
-        $Client = unserialize($this->session->userdata('client'));
+        $Client = unserialize($this->session->userdata('client_dashboard'));
         $param["client_datas"] = json_encode($Client);
         $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
         $param["modals"] = $this->request_modals();
@@ -110,7 +110,7 @@ class Welcome extends CI_Controller {
         $datas = $this->input->post();
         $datas['contact_subject'];
         $datas['contact_message'];
-        $Client = unserialize($this->session->userdata('client'));
+        $Client = unserialize($this->session->userdata('client_dashboard'));
         $Client->Id;
         try {
             Client::send_contact_us($datas["email"], $datas["username"], $datas["message"], $datas["company"], $datas["phone"]);
@@ -121,7 +121,7 @@ class Welcome extends CI_Controller {
     }
 
     public function payment_view() {
-        $Client = unserialize($this->session->userdata('client'));
+        $Client = unserialize($this->session->userdata('client_dashboard'));
         $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
         $param["modals"] = $this->request_modals();
         $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
@@ -153,7 +153,7 @@ class Welcome extends CI_Controller {
                 $Client->load_data_by_doorig_client_id($content->ClientId);
                 $Client->load_modules(TRUE);
 
-                $this->session->set_userdata('client', serialize($Client));
+                $this->session->set_userdata('client_dashboard', serialize($Client));
                 $param["client"] = $Client;
                 $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
                 $param["modals"] = $this->load->view('modals', '', true);
@@ -208,8 +208,8 @@ class Welcome extends CI_Controller {
         $datas = $this->input->post();
 
         try {
-            $client_id = unserialize($this->session->userdata('client'))->Id;
-            //var_dump($this->session->userdata('client'));
+            $client_id = unserialize($this->session->userdata('client_dashboard'))->Id;
+            //var_dump($this->session->userdata('client_dashboard'));
 //            $datas["final_module_id"] = 1;
 //            $client_id = 1;
             //1. llamar a la funcion generate_access_token que esta en el dasboard por Guzle
