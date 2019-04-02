@@ -23,20 +23,42 @@ class Payment extends CI_Controller {
         require_once config_item('business-response-login-token-class');
         require_once config_item('business-response-client-module-class');
     }
-    
+
     public function payment() {
-//        $Client_id = unserialize($this->session->userdata('client'))->Id;
-//        $datas = $this->input->post();
-//        
-//        $datas['cc-number'];
-//        $datas['cc-cvv'];
-//        $datas['cc-name'];
-//        $datas['cc-month'];
-//        $datas['cc-year'];
-//        $datas['cc-cpf'];
-//        $datas['promotional-code'];
-//        
-//        return Response::ResponseOK()->toJson();
+        $Client = new Client();
+        $Client = unserialize($this->session->userdata('client'));
+        $datas = $this->input->post();
+
+        $datas['client_id'] = mycrypt($Client->Id); ///////////////
+        $datas['user_email'] = $Client->DoorigInfo->email; /////////////////////
+
+        $visibility_url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL;
+        $visibility_url = str_replace("dashboard", "visibility", $visibility_url);
+        $url = $visibility_url . "Payment/add_payment";
+        $GuzClient = new \GuzzleHttp\Client(['verify' => false]);
+        $response = $GuzClient->post($url, [
+            GuzzleHttp\RequestOptions::FORM_PARAMS => [
+                'credit_card_number' => $datas['credit_card_number'],
+                'credit_card_cvc' => $datas['credit_card_cvc'],
+                'credit_card_name' => $datas['credit_card_name'],
+                'credit_card_exp_month' => $datas['credit_card_exp_month'],
+                'credit_card_exp_year' => $datas['credit_card_exp_year'],
+                'cpf' => $datas['cpf'],
+                'promotional-code' => $datas['promotional-code'],
+                'user_email' => $datas['user_email'],
+                'client_id' => $datas['client_id']
+            ]
+        ]);
+
+        $StatusCode = $response->getStatusCode();
+        $content = $response->getBody()->getContents();
+        $content = json_decode($content);
+        if ($StatusCode == 200 && $content->code == 0) {
+            //3. Response
+            return Response::ResponseOK()->toJson();
+        } else {
+            return Response::ResponseFAIL($content->message)->toJson();
+        }
     }
 
     public function vindi_notification_post() {
@@ -259,6 +281,6 @@ class Payment extends CI_Controller {
         $plane_type = json_decode(urldecode($_POST['plane_type']));
         $result = $Vindi->create_recurrency_payment($user_id, $pay_day, $plane_type);
         echo json_encode($result);
-    }    
+    }
 
 }

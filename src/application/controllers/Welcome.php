@@ -25,13 +25,7 @@ class Welcome extends CI_Controller {
     }
 
     //PRIMARY FUNCTIONS----------------------------------------------------------
-    public function aaa() {
-//        $Client = unserialize($this->session->userdata('client'));
-//        var_dump($Client);
-        var_dump($GLOBALS['sistem_config']);
-        //$this->session->sess_destroy();
-    }
-
+   
     public function index($login_token = NULL) {
         try {
             $Client = NULL;
@@ -126,8 +120,6 @@ class Welcome extends CI_Controller {
 
     public function payment_view() {
         $Client = unserialize($this->session->userdata('client'));
-        $param["client_id"] = $Client->DoorigInfo->Id;
-        $param["email"] = $Client->DoorigInfo->Email;
         $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
         $param["modals"] = $this->request_modals();
         $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;
@@ -135,7 +127,6 @@ class Welcome extends CI_Controller {
     }
 
     public function sumarize_view() {
-        //$param["client_datas"] = json_encode(unserialize($this->session->userdata('client_datas')));
         $param["lateral_menu"] = $this->load->view('lateral_menu', '', true);
         $param["modals"] = $this->load->view('modals', '', true);
         $param['SCRIPT_VERSION'] = $GLOBALS['sistem_config']->SCRIPT_VERSION;

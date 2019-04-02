@@ -30,8 +30,6 @@
         <script type="text/javascript">
             var base_url = "<?php echo base_url()?>";
             var module = "dashboard";
-            var client_id = "<?php echo $client_id;?>";
-            var email = "<?php echo $email;?>";
         </script>
     </head>
 
@@ -171,6 +169,6 @@
         <script src="<?php echo base_url()?>assets/js/dashboard/mask.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/basics.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
         <script src="<?php echo base_url()?>assets/js/dashboard/dasboard.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
-        <script src="<?php echo base_url()?>assets/js/dashboard/dashboard_client.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
+        <script src="<?php echo base_url()?>assets/js/dashboard/payment.js"<?php echo '?'.$SCRIPT_VERSION;?>></script>
     </body>
 </html>
