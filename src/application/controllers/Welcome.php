@@ -52,12 +52,14 @@ class Welcome extends CI_Controller {
                     @$Client->load_doorig_info();
 
                     $this->session->set_userdata('client', serialize($Client));
+                    header("Location:" . $GLOBALS['sistem_config']->DASHBOARD_SITE_URL);
+                    return;
                 }
             } else if ($this->session->userdata('client')) {
                 $Client = unserialize($this->session->userdata('client'));
             }
             if ($Client) {
-                $a=json_encode(object_to_array($Client));
+                $a = json_encode(object_to_array($Client));
                 $param["client"] = json_encode(object_to_array($Client));
                 $param["lateral_menu"] = $this->request_lateral_menu($Client->Id);
                 $param["modals"] = $this->request_modals();
@@ -90,7 +92,7 @@ class Welcome extends CI_Controller {
         $this->session->set_userdata('client_module', NULL);
         $this->session->set_userdata('client', NULL);
         $this->session->sess_destroy();
-        
+
         header('Location: ' . $GLOBALS['sistem_config']->BASE_SITE_URL);
     }
 
