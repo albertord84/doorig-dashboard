@@ -131,7 +131,7 @@ namespace business {
          * @param int $active
          * @return DataSet  
          */
-        public function load_modules(int $active) {
+        public function load_modules(int $active = 1) {
             $CI = &get_instance();
             $CI->Clients_modules_model->set_client_id($this->Id);
             $this->ClientModules->load_data($active);

@@ -27,10 +27,14 @@ class Payment extends CI_Controller {
     public function payment() {
         $Client = new Client();
         $Client = unserialize($this->session->userdata('client_dashboard'));
+        $Client->load_modules();
+        if (!$Client->ClientModules->hasModule(\business\ClientModules::visibility))
+            return Response::ResponseFAIL(T('Não tem modulos contratados para efetuar pagamento!'))->toJson();
         $datas = $this->input->post();
 
         $datas['client_id'] = mycrypt($Client->Id); ///////////////
-        $datas['user_email'] = $Client->DoorigInfo->email; /////////////////////
+        $datas['user_email'] = $Client->DoorigInfo->Email; /////////////////////
+        $promotional_code = $datas["promotional-code"];
 
         $visibility_url = $GLOBALS['sistem_config']->DASHBOARD_SITE_URL;
         $visibility_url = str_replace("dashboard", "visibility", $visibility_url);
@@ -44,20 +48,23 @@ class Payment extends CI_Controller {
                 'credit_card_exp_month' => $datas['credit_card_exp_month'],
                 'credit_card_exp_year' => $datas['credit_card_exp_year'],
                 'cpf' => $datas['cpf'],
-                'promotional-code' => $datas['promotional-code'],
+                'promotional_code' => "$promotional_code",
                 'user_email' => $datas['user_email'],
-                'client_id' => $datas['client_id']
+                'client_id_original' => $Client->Id,
+                'client_id' => serialize($datas['client_id'])
             ]
         ]);
 
         $StatusCode = $response->getStatusCode();
-        $content = $response->getBody()->getContents();
-        $content = json_decode($content);
-        if ($StatusCode == 200 && $content->code == 0) {
+        $content_aux = $response->getBody()->getContents();
+        $content = json_decode($content_aux);
+        $response->getBody()->close();
+        if ($StatusCode == 200 && isset($content->code) && $content->code == 0) {
             //3. Response
             return Response::ResponseOK()->toJson();
         } else {
-            return Response::ResponseFAIL($content->message)->toJson();
+            $message = isset($content->message) ? $content->message : print_r($content_aux, TRUE);
+            return Response::ResponseFAIL($message)->toJson();
         }
     }
 
