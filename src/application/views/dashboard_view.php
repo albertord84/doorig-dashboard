@@ -95,7 +95,7 @@
                                 <a class="has-arrow waves-effect waves-dark post-stories-access" aria-expanded="false">
                                     <i id="icon_module_posting" style="font-size:140px" class="icon-Landscape-2"></i>
                                     <br>
-                                    <span id="text_module_posting" style="color:black">Contratar</span>
+                                    <span id="text_module_posting" style="color:black">Em breve ...</span>
                                 </a>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                                 <a class="has-arrow waves-effect waves-dark directs-access" aria-expanded="false">
                                     <i id="icon_module_directs" style="font-size:140px" class="icon-Mail-Send"></i>
                                     <br>
-                                    <span id="text_module_directs" style="color:black">Contratar</span>
+                                    <span id="text_module_directs" style="color:black">Em breve ...</span>
                                 </a>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                 <a class="has-arrow waves-effect waves-dark deep-analysis-access" aria-expanded="false">
                                     <i id="icon_module_deep_analisys" style="font-size:140px" class="icon-Brain-2"></i>
                                     <br>
-                                    <span id="text_module_deep_analisys" style="color:black">Contratar</span>
+                                    <span id="text_module_deep_analisys" style="color:black">Em breve ...</span>
                                 </a>
                             </div>
                         </div>
