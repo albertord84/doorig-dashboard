@@ -21,6 +21,7 @@
         <link href="<?php echo base_url()?>assets/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">        
         <!-- Custom CSS -->
         <link href="<?php echo base_url()?>assets/css/style.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">
+        <link href="<?php echo base_url()?>assets/css/mycss.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">
         <link href="<?php echo base_url()?>assets/css/style-doorig.css"<?php echo '?'.$SCRIPT_VERSION;?> rel="stylesheet">        
         <!-- Dashboard 1 Page CSS -->
         <link href="<?php echo base_url()?>assets/css/pages/dashboard1.css" rel="stylesheet">        
@@ -114,7 +115,10 @@
                                                     <label> (*) Campos obrigatórios</label>
                                                 </div>
                                                 <div class="text-center">
-                                                    <button id="payment_btn" type="button" style="min-width: 150px" class="btn btn-info m-t-20"><i class="fa fa-envelope-o"></i> Enviar</button>
+                                                    <button id="payment_btn" type="button" style="min-width: 150px" class="btn btn-info m-t-20">
+                                                        <i class="fa fa-spinner fa-spin myspinner"></i>
+                                                        Enviar
+                                                    </button>
                                                 </div>
                                             </div>
                                     </div>

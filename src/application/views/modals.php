@@ -69,7 +69,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p id="text_information" style="color:black"></p>
+                <p id="text_information" style="color:black; text-align: justify"></p>
             </div>
             <div class="modal-footer">
                 <button id="accept_modal_text_information" type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>

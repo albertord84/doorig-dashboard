@@ -29,10 +29,11 @@ $(document).ready(function(){
     });
     
     $(".visivility-access").click(function(){
+        if (typeof submodule !== 'undefined') 
+            if(submodule=="visibility_updates")
+                $(location).attr('href', base_url+"index.php/welcome/index/");
         if(module=="visibility")
             return;
-        if(module=="visibility_updates")
-            $(location).attr('href', base_url+"index.php/welcome/index/");
         var final_url = base_url.replace(module,"visibility");
         //var btn =this;
         $.ajax({
@@ -59,17 +60,17 @@ $(document).ready(function(){
     $(".post-stories-access").click(function(){
         if(module=="post-stories")
             return;
-        modal_success_message("Módulo em desenvolvimento"); return false;
+        modal_text_information("Módulo em desenvolvimento"); return false;
 //        var final_url = base_url.replace(module,"posting");
 //        $(location).attr('href', final_url+"index.php/welcome/index/");
     });
     
     $(".directs-access").click(function(){        
-        modal_success_message("Módulo em desenvolvimento"); return false;
+        modal_text_information("Módulo em desenvolvimento"); return false;
     });
     
     $(".deep-analysis-access").click(function(){        
-        modal_success_message("Módulo em desenvolvimento"); return false;
+        modal_text_information("Módulo em desenvolvimento"); return false;
     });
     
     $(".payment-access").click(function(){
@@ -79,7 +80,7 @@ $(document).ready(function(){
         $(location).attr('href', final_url+"index.php/welcome/payment_view/");  
     });
     
-    $(".sumarize-account-access").click(function(){        
+    $(".sumarize-account-access").click(function(){
         
     });
             

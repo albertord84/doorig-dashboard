@@ -232,9 +232,8 @@ class Welcome extends CI_Controller {
                 var_dump($content);
 //                header("Location:" . $GLOBALS['sistem_config']->BASE_SITE_URL);
             }
-        } catch (Exception $exc) {
-            Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
-            return;
+        } catch (Exception $exc) {           
+            return  Response::ResponseFAIL($exc->getMessage(), $exc->getCode())->toJson();
         }
     }
 

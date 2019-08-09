@@ -37,6 +37,7 @@ $(document).ready(function(){
                     'cpf': $('#cc-cpf').val(),
                     'promotional-code': $('#promotional-code').val(),                    
                 };
+                var btn =this; spinner_start(btn);
                 $.ajax({
                     url: base_url + 'index.php/Payment/payment/',
                     data: datas,
@@ -52,6 +53,7 @@ $(document).ready(function(){
                     error: function (xhr, status) {
                     }
                 });
+                spinner_stop(btn);
             } else {
                 modal_alert_message(T('Data errada'));
             }   

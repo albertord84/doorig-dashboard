@@ -22,6 +22,13 @@ namespace business {
         public $Modules;
         private $Client; // Client Reference
 
+        const dashboard = 0;
+        const visibility = 1;
+        const post_stories = 2;
+        const directs = 3;
+        const leads = 4;
+        const statistic = 5;
+
         /**
          * 
          * @todo Class constructor.
@@ -85,14 +92,14 @@ namespace business {
                 if ($this->hasStatus($client_module_id))
                     return;
                 $init_date = $init_date ? $init_date : (string) time();
-                
+
                 $Module = new Module();
                 $Module->load_data($module_id);
-                
+
                 $client_module_item = new ClientModule($this->Client, $Module);
                 $client_module_item_id = $client_module_item->save($this->Client->Id, $client_module_id, $active, $init_date, $end_date);
                 $client_module_item->load_data_by_id($$client_module_item_id);
-                
+
                 $this->Modules[$$client_module_item_id] = $client_module_item;
                 return $$client_module_item_id;
             } catch (Exception $exc) {
